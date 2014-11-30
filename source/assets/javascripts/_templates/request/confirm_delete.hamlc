@@ -1,0 +1,9 @@
+.modal-header 
+  %button.close{type: 'button', data: {dismiss: 'modal'}, aria_hidden: true} &times;
+  %h.modal-title Confirm Delete 
+%form#confirm-form{role: 'form'}
+  .modal-body
+    %p.small= @url
+  .modal-footer.clearfix
+    %button.pull-left.btn.btn-warning{type: 'button',data: {dismiss: 'modal'}} Abort
+    %button.pull-right.btn.btn-danger{type: 'submit'} DELETE

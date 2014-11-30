@@ -1,0 +1,5 @@
+%li.meta-link
+  %a.relation{href: APP.URL.amend(@rel.href)}
+    %i.fa.fa-link
+    = @name
+

@@ -1,0 +1,27 @@
+#url-expansion-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header 
+        %button.close{type: 'button', data: {dismiss: 'modal'}, aria_hidden: true} &times;
+        %h.modal-title Templated URL Expansion
+      %form#url-expansion-form{role: 'form'}
+        .modal-body
+          %p
+            The url 
+            %code#templated-url.url.small
+            is templated, see 
+            %a{href: "http://tools.ietf.org/html/rfc6570"}
+              RFC6570 URI Template.  
+            
+          %p 
+            The parameters can be submitted via the following JSON data.
+            Values of 
+            %code null 
+            will remove the corresponding parameter. 
+            
+          .form-group
+            %label{for: "url-parameters-input"} URL parameters (JSON)
+            %textarea#url-parameters-input.form-control{rows: 10}
+        .modal-footer
+          %button.btn.btn-warning{type: 'button',data: {dismiss: 'modal'}} Abort
+          %button.btn.btn-primary{type: 'submit', autofocus: true} Continue

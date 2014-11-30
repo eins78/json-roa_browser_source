@@ -1,0 +1,4 @@
+%span
+  %strong
+    = @jqXHR.status
+  = @jqXHR.statusText

@@ -1,0 +1,3 @@
+%a.relation.method.method-get.btn.btn-success.btn-xs{ href: @href, 
+  class: (if APP.URL.isTemplated(@href) then "templated" else "non-templated")} 
+  GET

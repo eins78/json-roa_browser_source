@@ -1,0 +1,96 @@
+#alerts
+  #nojs-alert
+    .alert.alert-danger
+      %p
+        %strong
+          JavaScript is not enabled!
+      %p
+        The 
+        %em JSON-ROA Browser 
+        is a single page application depending on Javascript.
+
+
+= partial 'error_modal'
+= partial 'confirm_modal'
+= partial 'post_put_modal'
+= partial 'url_expansion_modal'
+
+.row
+  .col-md-6#request
+
+    %h2 Request
+
+    = partial "request_form"
+
+    %h2 
+      %span#resource-name.resource-name
+      Resource
+
+    #self-relation.panel.panel-warning
+      %table.table.table-striped.table-condensed
+        %thead
+        %tbody
+
+    #collection.panel.panel-warning
+      .panel-heading.clearfix
+        .pull-left 
+          %span.resource-name
+          Collection
+        .btn-group.pull-right
+          %a#next.btn.btn-xs.btn-primary
+            Next
+            %i.fa.fa-arrow-circle-right
+      %table.table.table-striped.table-condensed
+        %thead
+        %tbody
+
+
+    #relations.panel.panel-warning
+      .panel-heading 
+        %span.resource-name
+        Relations
+      %table.table.table-striped.table-condensed
+        %thead
+        %tbody
+
+  .col-md-6#response
+
+    %h2 Response
+
+    #response-alerts
+      #response-status
+
+    #response-headers-panel.panel.panel-default
+      .panel-heading.clearfix  
+        .pull-left Headers
+      .panel-body.source-code
+        %pre#response-headers.source-code.small.pre-scrollable
+
+    #response-json-data-panel.panel.panel-info
+      .panel-heading JSON Data
+      .panel-body.source-code
+        %pre#response-json-data.source-code.small.pre-scrollable
+
+    #response-json-roa-panel.panel.panel-info
+      .panel-heading JSON-ROA Data
+      .panel-body.source-code
+        %pre#response-json-roa.source-code.small.pre-scrollable
+
+    #response-text-panel.panel.panel-default
+      .panel-heading.clearfix  
+        .pull-left Text
+      .panel-body.source-code
+        %pre#response-text.source-code.small.pre-scrollable
+
+    #response-content-panel.panel.panel-default.no-padding-panel
+      .panel-heading.clearfix  
+        .pull-left 
+          Content Iframe 
+          %span.text-warning (uses browser accept header!)
+        .pull-right 
+          %a#open-content.btn.btn-default.btn-xs
+            %i.fa.fa-arrows-alt 
+      .panel-body
+        %iframe#iframe{style: "width: 100%"} 
+
+

@@ -1,3 +1,5 @@
+require 'haml_coffee_assets'
+
 ###
 # Compass
 ###
@@ -46,26 +48,31 @@
 #     "Helping"
 #   end
 # end
+#
 
-set :css_dir, 'stylesheets'
+set :relative_links, true
 
-set :js_dir, 'javascripts'
+set :css_dir, 'assets/stylesheets'
 
-set :images_dir, 'images'
+::HamlCoffeeAssets.config.name_filter = lambda { |n| n.sub /^_templates\//, '' }
+
+set :js_dir, 'assets/javascripts'
+
+set :images_dir, 'assets/images'
 
 # Build-specific configuration
 configure :build do
   # For example, change the Compass output style for deployment
-  # activate :minify_css
+  activate :minify_css
 
   # Minify Javascript on build
-  # activate :minify_javascript
+  activate :minify_javascript
 
   # Enable cache buster
-  # activate :asset_hash
+  activate :asset_hash
 
   # Use relative URLs
-  # activate :relative_assets
+  activate :relative_assets
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"

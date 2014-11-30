@@ -1,0 +1,12 @@
+- if @methods.delete? 
+  != JST["relation/delete"]({href: @href,properties: @methods.delete})
+
+- if @methods.post? 
+  != JST["relation/post"]({href: @href,properties: @methods.post})
+
+- if @methods.put? 
+  != JST["relation/put"]({href: @href,properties: @methods.put})
+
+- if @methods.get? 
+  != JST["relation/get"]({href: @href,properties: @methods.get})
+
