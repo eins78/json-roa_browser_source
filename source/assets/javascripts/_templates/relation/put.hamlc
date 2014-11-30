@@ -1,2 +1,2 @@
-%a.relation.method.method-post.btn.btn-warning.btn-xs{href: @href, data: {method: 'post'}}
-  POST
+%a.relation.method.method-post.btn.btn-warning.btn-xs{href: @href, data: {method: 'put'}}
+  PUT
