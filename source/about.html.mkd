@@ -13,9 +13,31 @@ Status
 See [version](./version.html).
 
 
+Restrictions
+------------
+
+Programming against an API from a browser based application imposes security
+restrictions given by the browser. This is in particular true with respect to
+[XSS][] and [CORS][].
+
+It is in some cases impossible for the JSON-ROA Browser to report the original
+HTTP error or to detect the cause of a problem.
+
+If something is not working as expected and an unspecified error is shown,
+please have a look in your browser logs. This can give some indication to the
+underlying problem.
+{: .text-warning}
+
+We recommend to embed the JSON-ROA browser directly into the application to
+avoid [XSS][] restrictions. The [JSON-ROA github organization][] makes a [build
+of the JSON-ROA browser][] available to be included i.e. as a git submodule.
+{: .text-info}
+
+
+
 Copyright 
 ----------
-© Thomas Schank 2014; <DrTom@Schank.ch>, <Thomas.Schank@algocon.ch>
+Copyright © 2014, 2015 Thomas Schank 
 
 License
 -------
@@ -45,7 +67,7 @@ Each of those comes with its own license.
 Build Dependencies
 ------------------
 
-*The JSON-ROA Browser* is build with following fine tools: 
+*The JSON-ROA Browser* is build with following tools: 
 
 -   [Browserify][]
 -   [Haml Coffee Assets][]
@@ -69,4 +91,10 @@ Build Dependencies
   [format-json]: https://github.com/johan/format-json
   [jQuery]: http://jquery.com/
   [uri-templates]: https://github.com/geraintluff/uri-templates
+
+  [XSS]: http://en.wikipedia.org/wiki/Cross-site_scripting
+  [CORS]: http://en.wikipedia.org/wiki/Cross-origin_resource_sharing
+  [github.com/json-roa/json-roa\_browser\_source]: https://github.com/json-roa/json-roa_browser_source
+  [build of the JSON-ROA browser]: https://github.com/json-roa/json-roa_browser_build
+  [JSON-ROA github organization]: https://github.com/json-roa
 

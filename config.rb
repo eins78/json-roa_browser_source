@@ -52,13 +52,19 @@ require 'haml_coffee_assets'
 
 set :relative_links, true
 
-set :css_dir, 'assets/stylesheets'
 
 ::HamlCoffeeAssets.config.name_filter = lambda { |n| n.sub /^_templates\//, '' }
 
+set :css_dir, 'assets/stylesheets'
+
 set :js_dir, 'assets/javascripts'
 
+set :fonts_dir, 'assets/fonts'
+
 set :images_dir, 'assets/images'
+
+set :haml, ugly: true
+
 
 # Build-specific configuration
 configure :build do

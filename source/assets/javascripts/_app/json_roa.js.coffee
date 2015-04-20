@@ -85,10 +85,10 @@ $ ->
       confirmRendered= JST['request/confirm_delete']({url: url})
       APP.Util.confirm(confirmRendered, (()-> APP.Request.del url)))
 
-  putLinkOfTarget= (e)->
+  postPutLinkOfTarget= (e,method)->
     e.preventDefault()
     APP.URL.build $(e.currentTarget).attr("href"), ((url)-> 
-      APP.Request.postPutModal(url,'put') )
+      APP.Request.postPutModal(url,method))
 
 
   $("#collection").on 'click', "a#next", (e)->
@@ -99,7 +99,9 @@ $ ->
       when "delete" 
         deleteLinkOfTarget e 
       when "put"
-        putLinkOfTarget e
+        postPutLinkOfTarget e, 'PUT'
+      when "post"
+        postPutLinkOfTarget e, 'POST'
       else 
         followLinkOfTarget e
 
