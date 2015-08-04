@@ -5,9 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production webpack",
     "dev": "webpack-dev-server",
-    "watch": "webpack --progress --colors --watch"
+    "watch": "webpack --progress --colors --watch",
+    "prebuild": "rm -rf build && mkdir build",
+    "build": "webpack -p",
+    "deploy-178": "npm run build && rsync -avPh --delete build/*.* mt:domains/dev.178.is/html/json-roa-browser/"
   },
   "authors": [
     "Thomas Schank <DrTom@schank.ch>",
