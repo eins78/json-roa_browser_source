@@ -1,8 +1,10 @@
 React = require('react')
+ampersandReactMixin = require 'ampersand-react-mixin'
 
 module.exports = React.createClass
   # react methods:
   displayName: 'RequestConfig'
+  mixins: [ampersandReactMixin]
 
   # event handlers:
   onChangeUrl: (event) ->
