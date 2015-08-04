@@ -21,8 +21,10 @@
     "ampersand-react-mixin": "^0.1.4",
     "ampersand-state": "^4.5.6",
     "bootstrap": "^3.3.5",
+    "hashchange": "^1.0.0",
     "lodash": "^3.10.1",
     "parse-headers": "^2.0.0",
+    "qs": "^4.0.0",
     "react": "^0.13.3",
     "xhr": "^2.0.3"
   },

@@ -2,8 +2,11 @@
 Model = require('ampersand-model')
 parseHeaders = require('parse-headers')
 xhr = require('xhr')
+hashchange = require('hashchange')
+urlQuery = require('qs')
 
 module.exports = Model.extend({
+  # define props and session (like props, but not persisted):
   props:
     requestUrl:
       type: 'string'
@@ -22,8 +25,11 @@ module.exports = Model.extend({
     do @runRequest # run the initial request
 
   # instance methods:
+  saveConfigToUrl: ()->
+    hashchange.updateHash(urlQuery.stringify(@toJSON()))
+
   runRequest: ()->
-    return unless @requestUrl
+    do @saveConfigToUrl
     xhr {
       url: @requestUrl
       method: 'GET'

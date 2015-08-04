@@ -1,5 +1,7 @@
 app = require('ampersand-app')
 React = require('react')
+urlQuery = require('qs')
+hashchange = require('hashchange')
 
 AppView = require('./views/app')
 Browser = require('./models/browser')
@@ -8,11 +10,13 @@ Browser = require('./models/browser')
 require('./style.less')
 
 app.extend
-  browser: new Browser()
-  # TODO: loggger: ???
-
   init: ()->
-    # TODO: apply initial config from URL
+    # init browser model, set initial config from URL
+    @browser = new Browser(urlQuery.parse(window.location.hash.slice(1)))
+
+    # update model whenever the url hash changes:
+    hashchange.update (hashFragment)=>
+      @browser.set(urlQuery.parse(hashFragment))
 
     # init react view (auto-refreshes on model changes):
     React.render(<AppView app={app}/>, document.body)
