@@ -20,21 +20,24 @@ module.exports = React.createClass
 
     conf = @props.config
 
-    <div className='app--browser--request'>
+    <div className='app--browser--request panel panel-default'>
+      <div className='panel-heading'>
         <h3>Request
           <div className="btn-group btn-group-xs pull-right" role="group">
             <Btn title='reset' onClick={@onClearClick}>
               <Icon glyph='trash'/></Btn>
           </div>
         </h3>
+      </div>
 
       <form id="request-form" role="form" onSubmit={@props.onSubmit}>
 
+        <div className='panel-body'>
         <div className='row'>
 
           <div className='col-md-7'>
           <div className="form-group">
-            <label htmlhtmlFor="request-headers">Request Headers</label>
+            <label htmlhtmlFor="request-headers">HTTP Headers</label>
             <textarea className="form-control small"
               id="request-headers"
               rows='3'
@@ -66,7 +69,9 @@ module.exports = React.createClass
           </div>
 
         </div>
+        </div>
 
+        <div className='panel-footer'>
         <div className="form-group">
           <div className="input-group">
             <input className="form-control small"
@@ -81,6 +86,7 @@ module.exports = React.createClass
               </button>
             </span>
           </div>
+        </div>
         </div>
 
       </form>
