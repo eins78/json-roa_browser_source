@@ -7,7 +7,7 @@ AppView = require('./views/app')
 Browser = require('./models/browser')
 
 # add css to output:
-require('./style.less')
+require('./styles.less')
 
 app.extend
   init: ()->
