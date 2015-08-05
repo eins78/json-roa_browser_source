@@ -26,6 +26,7 @@
     "hashchange": "^1.0.0",
     "lodash": "^3.10.1",
     "nets": "^3.1.0",
+    "node-status-codes": "^1.0.0",
     "parse-headers": "^2.0.0",
     "qs": "^4.0.0",
     "react": "^0.13.3",

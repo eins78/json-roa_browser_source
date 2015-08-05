@@ -15,6 +15,10 @@ module.exports = React.createClass
 
     return fallback unless response?
 
+    # tmp
+    httpStatus = require('node-status-codes')
+    statusText = httpStatus[response.statusCode] or 'Unknown'
+
     <div className={'app--browser--response ' + panelClass}>
     
       <div className='response-status panel-heading'>
