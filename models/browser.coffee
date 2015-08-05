@@ -1,7 +1,7 @@
 # browser Model - browser.js
 Model = require('ampersand-model')
 parseHeaders = require('parse-headers')
-xhr = require('xhr')
+curl = require('../lib/curl')
 hashchange = require('hashchange')
 urlQuery = require('qs')
 
@@ -30,11 +30,12 @@ module.exports = Model.extend({
 
   runRequest: ()->
     do @saveConfigToUrl
-    xhr {
+    opts = {
       url: @requestUrl
       method: 'GET'
       headers: parseHeaders(@requestHeaders)
-    }, (err, res, body)=>
-      @set('responseBody', res)
+    }
+    curl opts, (err, res, body)=>
+      @set('responseBody', raw)
       # @response.set {err: err, res: res, body: body}
 })
