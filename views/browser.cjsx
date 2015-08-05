@@ -11,8 +11,9 @@ module.exports = React.createClass
   onRequestConfigChange: (config)->
     @props.browser.set('requestConfig', config)
 
-  onRequestSubmit: (event)->
+  onRequestSubmit: (event)-> # save config, then run request:
     event.preventDefault()
+    @props.browser.save()
     @props.browser.runRequest()
 
   render: ()->

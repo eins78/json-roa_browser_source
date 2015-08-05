@@ -22,6 +22,9 @@ app.extend
     # init react view (auto-refreshes on model changes):
     React.render(<AppView app={app}/>, document.body)
 
+    # run the initial request on startup
+    do @browser.runRequest
+
 # attach to browser console for development
 window.app = app
 

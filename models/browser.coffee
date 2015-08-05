@@ -25,17 +25,11 @@ module.exports = Model.extend({
     if typeof data is 'string'
       return {requestConfig: (try urlQuery.parse(data))}
 
-  # runs after 'create' (this = new instance with all attributes):
-  initialize: () ->
-    do @runRequest # run the initial request
-
   # instance methods:
   save: ()->
     hashchange.updateHash(urlQuery.stringify(@requestConfig.toJSON()))
 
   runRequest: ()->
-    # NOTE: save config to browser history whenever a request is executed!
-    do @save
     opts = {
       method: 'GET'
       url: @requestConfig.url
