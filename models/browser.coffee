@@ -17,6 +17,8 @@ module.exports = Model.extend({
   # properties that are only local (never serialized)
   # NOTE: When type=state, instances will be swapped out regularly (and change!)
   session:
+    currentRequest: 'object'
+    lastRequest: 'object'
     responseBody: 'object' # TMP
 
   # run on 'create' when option parse=true
@@ -30,12 +32,19 @@ module.exports = Model.extend({
     hashchange.updateHash(urlQuery.stringify(@requestConfig.toJSON()))
 
   runRequest: ()->
+
+    if @currentRequest?
+      @currentRequest.abort()
+      @currentRequest = null
+
     opts = {
       method: 'GET'
       url: @requestConfig.url
       headers: parseHeaders(@requestConfig.headers)
     }
-    curl opts, (err, res, body)=>
       @set('responseBody', raw)
       # @response.set {err: err, res: res, body: body}
+    @currentRequest = curl opts, (err, res)=>
+      @lastRequest = @currentRequest
+      @currentRequest = null
 })
