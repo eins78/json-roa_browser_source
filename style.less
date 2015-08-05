@@ -6,4 +6,40 @@
 body {
   background: @bg;
   font-family: 'Source Code Pro', monospace;
+.panel {
+  .panel-heading {
+    h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  &.panel-closed > .panel-heading {
+    border-bottom: none;
+  }
+  pre.panel-body {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    // background-color: @body-bg;
+  }
+  .panel {
+
+    border: none;
+    border-radius: 0;
+
+    &.panel-thick { border-width: 4px; }
+    border-radius: 0;
+    margin-bottom: 0;
+    border-bottom-width: 0;
+    .panel-heading {
+      border-radius: 0;
+    }
+    // &:last-child {
+    //   &, & .panel-body, &.panel-closed > .panel-heading {
+    //     border-bottom-width: inherit;
+    //     border-bottom-right-radius: inherit;
+    //     border-bottom-left-radius: inherit;
+    //   }
+    // }
+  }
 }

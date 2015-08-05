@@ -1,23 +1,30 @@
 React = require('react')
 ampersandReactMixin = require 'ampersand-react-mixin'
+DataPanel = require('../data-panel')
 
 module.exports = React.createClass
   displayName: 'ResponseInfo'
-  displayName: 'ApiBrowser'
-
   mixins: [ampersandReactMixin]
 
   render: ()->
     response = @props.response
+    level = 'success' # TODO: from response code
+    panelClass = "panel panel-#{level}"
+    labelClass = "label label-#{level}"
+    fallback = <div/>
 
-    content = if response?
-      <pre>
-        {JSON.stringify(response, 0, 2)}
-      </pre>
-    else
-       <span>No Response yet…</span>
+    return fallback unless response?
 
-    <div className='app--browser--response'>
-      <h3>Response RAW</h3>
-      {content}
+    <div className={'app--browser--response ' + panelClass}>
+    
+      <div className='response-status panel-heading'>
+        <h3>Response <samp className={labelClass}>
+          <strong>{response.statusCode}</strong> {statusText}</samp></h3>
+      </div>
+
+      <DataPanel title='Response RAW' level='info' dataObj={response}/>
+      <DataPanel title='Headers' dataObj={null}/>
+      <DataPanel title='JSON Data' dataObj={null}/>
+      <DataPanel title='JSON-ROA Data' dataObj={null}/>
+
     </div>

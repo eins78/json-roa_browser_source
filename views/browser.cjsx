@@ -19,15 +19,18 @@ module.exports = React.createClass
   render: ()->
     browser = @props.browser
 
-    <div className='app--browser'>
+    <div className='app--browser row'>
 
-      <RequestForm
-        url={browser.requestUrl}
-        headers={browser.requestHeaders}
-        onSubmit={@onRequestSubmit}
-        onConfigChange={@onRequestConfigChange}/>
+      <div className='col-md-7'>
+        <RequestForm
+          url={browser.requestUrl}
+          headers={browser.requestHeaders}
+          onSubmit={@onRequestSubmit}
+          onConfigChange={@onRequestConfigChange}/>
+      </div>
 
-      <ResponseInfo
-        response={browser.responseBody}/>
-
+      <div className='col-md-5'>
+        <ResponseInfo
+          response={browser.responseBody}/>
+      </div>
     </div>
