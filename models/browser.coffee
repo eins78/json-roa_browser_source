@@ -33,6 +33,12 @@ module.exports = Model.extend({
   save: ()->
     hashchange.updateHash(urlQuery.stringify(@requestConfig.serialize()))
 
+  clear: () ->
+    @currentRequest?.abort()
+    @requestConfig.clear()
+    Model::clear.call(@)
+    @save()
+
   runRequest: ()->
 
     if @currentRequest?
