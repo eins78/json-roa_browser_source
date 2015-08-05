@@ -1,6 +1,6 @@
 React = require('react')
 ampersandReactMixin = require 'ampersand-react-mixin'
-RequestForm = require('./browser/request-form')
+RequestConfig = require('./browser/request-config')
 ResponseInfo = require('./browser/response-info')
 
 # API Browser UI –
@@ -21,7 +21,7 @@ module.exports = React.createClass
     <div className='app--browser row'>
 
       <div className='col-md-7'>
-        <RequestForm
+        <RequestConfig
           config={browser.requestConfig}
           onSubmit={@onRequestSubmit}
           onConfigChange={@onRequestConfigChange}/>

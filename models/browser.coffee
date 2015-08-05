@@ -1,29 +1,35 @@
 # browser Model - browser.js
-Model = require('ampersand-model')
+Model = require('ampersand-state')
 parseHeaders = require('parse-headers')
-curl = require('../lib/curl')
 hashchange = require('hashchange')
 urlQuery = require('qs')
+curl = require('../lib/curl')
+
 RequestConfig = require('./request-config')
 
 module.exports = Model.extend({
+  # props: NOTE: the browser has no 'props', only children, session and methods.
 
+  # children: nested state; NOTE: instances are never swapped out, only changed!
   children:
     requestConfig: RequestConfig
 
+  # properties that are only local (never serialized)
+  # NOTE: When type=state, instances will be swapped out regularly (and change!)
   session:
-    responseBody: 'object' # tmp
+    responseBody: 'object' # TMP
 
   # runs after 'create' (this = new instance with all attributes):
   initialize: () ->
     do @runRequest # run the initial request
 
   # instance methods:
-  saveConfigToUrl: ()->
+  save: ()->
     hashchange.updateHash(urlQuery.stringify(@requestConfig.toJSON()))
 
   runRequest: ()->
-    do @saveConfigToUrl
+    # NOTE: save config to browser history whenever a request is executed!
+    do @save
     opts = {
       method: 'GET'
       url: @requestConfig.url
