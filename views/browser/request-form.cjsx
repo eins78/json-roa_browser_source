@@ -15,6 +15,8 @@ module.exports = React.createClass
 
   render: ()->
 
+    conf = @props.config
+
     <div className='app--browser--request'>
       <h3>Request</h3>
 
@@ -25,7 +27,7 @@ module.exports = React.createClass
           <textarea className="form-control small"
             id="request-headers"
             onChange={@onChangeHeaders}
-            value={@props.headers}/>
+            value={conf.headers}/>
         </div>
 
         <div className="form-group">
@@ -33,7 +35,7 @@ module.exports = React.createClass
             <input className="form-control small"
               id="url"
               type="text"
-              value={@props.url}
+              value={conf.url}
               onChange={@onChangeUrl}
               placeholder="Enter the URL of a JSON-ROA enabled API here!"/>
             <span className="input-group-btn">

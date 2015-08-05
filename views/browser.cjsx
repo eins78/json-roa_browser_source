@@ -9,8 +9,7 @@ module.exports = React.createClass
   mixins: [ampersandReactMixin]
 
   onRequestConfigChange: (config)->
-    @props.browser.set('requestUrl', config.url) if config.url?
-    @props.browser.set('requestHeaders', config.headers) if config.headers?
+    @props.browser.set('requestConfig', config)
 
   onRequestSubmit: (event)->
     event.preventDefault()
@@ -23,8 +22,7 @@ module.exports = React.createClass
 
       <div className='col-md-7'>
         <RequestForm
-          url={browser.requestUrl}
-          headers={browser.requestHeaders}
+          config={browser.requestConfig}
           onSubmit={@onRequestSubmit}
           onConfigChange={@onRequestConfigChange}/>
       </div>

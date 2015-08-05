@@ -4,18 +4,12 @@ parseHeaders = require('parse-headers')
 curl = require('../lib/curl')
 hashchange = require('hashchange')
 urlQuery = require('qs')
+RequestConfig = require('./request-config')
 
 module.exports = Model.extend({
-  # define props and session (like props, but not persisted):
-  props:
-    requestUrl:
-      type: 'string'
-      default: 'https://json-roa-demo.herokuapp.com/'
-      required: true
-    requestHeaders:
-      type: 'string'
-      default: 'Accept: application/json-roa+json\n'
-      required: false
+
+  children:
+    requestConfig: RequestConfig
 
   session:
     responseBody: 'object' # tmp
@@ -26,14 +20,14 @@ module.exports = Model.extend({
 
   # instance methods:
   saveConfigToUrl: ()->
-    hashchange.updateHash(urlQuery.stringify(@toJSON()))
+    hashchange.updateHash(urlQuery.stringify(@requestConfig.toJSON()))
 
   runRequest: ()->
     do @saveConfigToUrl
     opts = {
-      url: @requestUrl
       method: 'GET'
-      headers: parseHeaders(@requestHeaders)
+      url: @requestConfig.url
+      headers: parseHeaders(@requestConfig.headers)
     }
     curl opts, (err, res, body)=>
       @set('responseBody', raw)
