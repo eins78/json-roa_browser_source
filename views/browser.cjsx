@@ -8,8 +8,8 @@ module.exports = React.createClass
   displayName: 'ApiBrowser'
   mixins: [ampersandReactMixin]
 
-  onRequestConfigChange: (config)->
-    @props.browser.set('requestConfig', config)
+  onRequestConfigChange: (key, value)->
+    @props.browser.requestConfig.set(key, value)
 
   onRequestSubmit: (event)-> # save config, then run request:
     event.preventDefault()

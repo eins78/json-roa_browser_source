@@ -2,6 +2,7 @@ React = require('react')
 Btn = require('react-bootstrap/lib/Button')
 Icon = require('react-bootstrap/lib/Glyphicon')
 ampersandReactMixin = require 'ampersand-react-mixin'
+f = require('../../lib/fun')
 
 module.exports = React.createClass
   # react methods:
@@ -9,12 +10,10 @@ module.exports = React.createClass
   mixins: [ampersandReactMixin]
 
   # event handlers:
-  onChangeUrl: (event) ->
-    @props.onConfigChange(url: event.target.value)
   onClearClick: (_event) -> @props.onClear()
 
-  onChangeHeaders: (event) ->
-    @props.onConfigChange(headers: event.target.value)
+  updateConfigKey: (key, event) ->
+    @props.onConfigChange(key, event.target.value)
 
   render: ()->
 
@@ -41,8 +40,8 @@ module.exports = React.createClass
             <textarea className="form-control small"
               id="request-headers"
               rows='3'
-              onChange={@onChangeHeaders}
-              value={conf.headers}/>
+              value={conf.headers}
+              onChange={f.curry(@updateConfigKey)('headers')}/>
           </div>
           </div>
 
@@ -78,7 +77,7 @@ module.exports = React.createClass
               id="url"
               type="text"
               value={conf.url}
-              onChange={@onChangeUrl}
+              onChange={f.curry(@updateConfigKey)('url')}
               placeholder="Enter the URL of a JSON-ROA enabled API here!"/>
             <span className="input-group-btn">
               <button className="btn btn-primary" id="get" type="submit">
