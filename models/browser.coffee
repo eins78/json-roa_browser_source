@@ -31,7 +31,7 @@ module.exports = Model.extend({
 
   # instance methods:
   save: ()->
-    hashchange.updateHash(urlQuery.stringify(@requestConfig.toJSON()))
+    hashchange.updateHash(urlQuery.stringify(@requestConfig.serialize()))
 
   runRequest: ()->
 
