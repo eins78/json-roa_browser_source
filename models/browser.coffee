@@ -19,6 +19,12 @@ module.exports = Model.extend({
   session:
     responseBody: 'object' # TMP
 
+  # run on 'create' when option parse=true
+  parse: (data) ->
+    # takes request config as a query-string (typically from url hash)
+    if typeof data is 'string'
+      return {requestConfig: (try urlQuery.parse(data))}
+
   # runs after 'create' (this = new instance with all attributes):
   initialize: () ->
     do @runRequest # run the initial request

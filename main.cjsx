@@ -11,14 +11,13 @@ require('./style.less')
 
 app.extend
   init: ()->
-    # init browser model, set initial config from URL
-    @browser = new Browser(
-      requestConfig: urlQuery.parse(window.location.hash.slice(1))
-    )
+    # init browser model, sets initial config from URL hash fragment:
+    @browser = new Browser(window.location.hash.slice(1), parse: true)
 
-    # update model whenever the url hash changes:
+    # whenever the url hash changes, update model and run the request:
     hashchange.update (hashFragment)=>
       @browser.set(requestConfig: urlQuery.parse(hashFragment))
+      @browser.runRequest()
 
     # init react view (auto-refreshes on model changes):
     React.render(<AppView app={app}/>, document.body)
