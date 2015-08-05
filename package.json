@@ -30,6 +30,7 @@
     "parse-headers": "^2.0.0",
     "qs": "^4.0.0",
     "react": "^0.13.3",
+    "react-bootstrap": "^0.24.3",
     "xhr": "^2.0.3"
   },
   "devDependencies": {

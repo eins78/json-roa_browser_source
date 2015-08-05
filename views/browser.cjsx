@@ -16,6 +16,8 @@ module.exports = React.createClass
     @props.browser.save()
     @props.browser.runRequest()
 
+  onClear: ()-> @props.browser.clear()
+
   render: ()->
     browser = @props.browser
 
@@ -25,6 +27,7 @@ module.exports = React.createClass
         <RequestConfig
           config={browser.requestConfig}
           onSubmit={@onRequestSubmit}
+          onClear={@onClear}
           onConfigChange={@onRequestConfigChange}/>
       </div>
 

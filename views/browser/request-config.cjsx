@@ -1,4 +1,6 @@
 React = require('react')
+Btn = require('react-bootstrap/lib/Button')
+Icon = require('react-bootstrap/lib/Glyphicon')
 ampersandReactMixin = require 'ampersand-react-mixin'
 
 module.exports = React.createClass
@@ -9,6 +11,7 @@ module.exports = React.createClass
   # event handlers:
   onChangeUrl: (event) ->
     @props.onConfigChange(url: event.target.value)
+  onClearClick: (_event) -> @props.onClear()
 
   onChangeHeaders: (event) ->
     @props.onConfigChange(headers: event.target.value)
@@ -18,7 +21,12 @@ module.exports = React.createClass
     conf = @props.config
 
     <div className='app--browser--request'>
-      <h3>Request</h3>
+        <h3>Request
+          <div className="btn-group btn-group-xs pull-right" role="group">
+            <Btn title='reset' onClick={@onClearClick}>
+              <Icon glyph='trash'/></Btn>
+          </div>
+        </h3>
 
       <form id="request-form" role="form" onSubmit={@props.onSubmit}>
 
