@@ -6,6 +6,7 @@ urlQuery = require('qs')
 curl = require('../lib/curl')
 
 RequestConfig = require('./request-config')
+Response = require('./response')
 
 module.exports = Model.extend({
   # props: NOTE: the browser has no 'props', only children, session and methods.
@@ -17,6 +18,7 @@ module.exports = Model.extend({
   # properties that are only local (never serialized)
   # NOTE: When type=state, instances will be swapped out regularly (and change!)
   session:
+    response: 'state'
     currentRequest: 'object'
     lastRequest: 'object'
     responseBody: 'object' # TMP
@@ -42,9 +44,9 @@ module.exports = Model.extend({
       url: @requestConfig.url
       headers: parseHeaders(@requestConfig.headers)
     }
-      @set('responseBody', raw)
-      # @response.set {err: err, res: res, body: body}
+
     @currentRequest = curl opts, (err, res)=>
       @lastRequest = @currentRequest
       @currentRequest = null
+      @response = new Response(res)
 })

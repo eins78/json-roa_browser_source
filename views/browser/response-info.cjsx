@@ -7,7 +7,8 @@ module.exports = React.createClass
   mixins: [ampersandReactMixin]
 
   render: ()->
-    response = @props.response
+    {response} = @props
+
     level = 'success' # TODO: from response code
     panelClass = "panel panel-#{level}"
     labelClass = "label label-#{level}"
@@ -15,20 +16,17 @@ module.exports = React.createClass
 
     return fallback unless response?
 
-    # tmp
-    httpStatus = require('node-status-codes')
-    statusText = httpStatus[response.statusCode] or 'Unknown'
-
     <div className={'app--browser--response ' + panelClass}>
-    
+
       <div className='response-status panel-heading'>
         <h3>Response <samp className={labelClass}>
-          <strong>{response.statusCode}</strong> {statusText}</samp></h3>
+          <strong>{response.statusCode}</strong> {response.statusText}</samp></h3>
       </div>
 
-      <DataPanel title='Response RAW' level='info' dataObj={response}/>
-      <DataPanel title='Headers' dataObj={null}/>
-      <DataPanel title='JSON Data' dataObj={null}/>
-      <DataPanel title='JSON-ROA Data' dataObj={null}/>
-
+      <ul className="list-group">
+        <DataPanel title='Headers'
+            text={response.headersText} dataObj={response.headers}/>
+        <DataPanel title='JSON Data' dataObj={response.jsonRaw}/>
+        <DataPanel title='JSON-ROA Data' dataObj={response.jsonRoaRaw}/>
+      </ul>
     </div>

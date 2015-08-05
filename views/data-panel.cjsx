@@ -4,10 +4,10 @@ module.exports = React.createClass
   displayName: 'DataPanel'
 
   render: ()->
-    {id, title, level, dataObj} = @props
+    {id, title, level, text, dataObj} = @props
     level ||= 'info'
 
-    text = (try JSON.stringify(dataObj, 0, 2)) if dataObj?
+    text ||= (try JSON.stringify(dataObj, 0, 2)) if dataObj?
     text ||= '[NO DATA]'
 
     <div id={id + '-panel'} className={'panel panel-thick panel-' + level}>

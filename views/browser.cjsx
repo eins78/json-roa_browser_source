@@ -30,6 +30,6 @@ module.exports = React.createClass
 
       <div className='col-md-5'>
         <ResponseInfo
-          response={browser.responseBody}/>
+          response={browser.response}/>
       </div>
     </div>
