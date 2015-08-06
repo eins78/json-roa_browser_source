@@ -5,7 +5,7 @@ module.exports = React.createClass
   render: ()->
     <div className='panel panel-danger'>
       <div className='panel-heading'>
-        <h3>Request Error!</h3>
+        <h3>{@props.title}</h3>
       </div>
       <div className='panel-body'>
         {@props.errorText}
