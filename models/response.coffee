@@ -3,9 +3,14 @@ httpStatusText = require('node-status-codes')
 f = require('../lib/fun')
 stringifyHeaders = require('../lib/stringify-http-headers')
 
+RoaObject = require('./roa-object')
+
 ROA_PROP = '_json-roa'
 
 module.exports = Model.extend
+  initialize: () ->
+    @roaObject= new RoaObject(@jsonRoaRaw)
+
   props:
     body: 'any'
     statusCode: 'number'
@@ -14,6 +19,9 @@ module.exports = Model.extend
     url: 'string'
     # NOTE: in case of error only 'error' is set!
     error: 'string'
+
+  children:
+    roaObject: RoaObject
 
   derived:
     statusText:
