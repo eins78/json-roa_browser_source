@@ -12,9 +12,6 @@ module.exports = React.createClass
     level = 'success' # TODO: from response code
     panelClass = "panel panel-#{level}"
     labelClass = "label label-#{level}"
-    fallback = <div/>
-
-    return fallback unless response?
 
     <div className={'app--browser--response ' + panelClass}>
 

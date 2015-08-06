@@ -43,6 +43,7 @@ module.exports = Model.extend({
     Model::clear.call(@)
 
   runRequest: ()->
+    @response = null
 
     if @currentRequest?
       @currentRequest.abort()
@@ -57,5 +58,8 @@ module.exports = Model.extend({
     @currentRequest = curl opts, (err, res)=>
       @lastRequest = @currentRequest
       @currentRequest = null
-      @response = new Response(res)
+      @response = unless err
+        new Response(res)
+      else
+        new Response(error: err.toString())
 })

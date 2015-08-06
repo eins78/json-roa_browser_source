@@ -2,6 +2,8 @@ React = require('react')
 ampersandReactMixin = require 'ampersand-react-mixin'
 RequestConfig = require('./browser/request-config')
 ResponseInfo = require('./browser/response-info')
+ErrorPanel = require('./browser/error-panel')
+RunningPanel = require('./browser/running-panel')
 
 # API Browser UI –
 module.exports = React.createClass
@@ -32,7 +34,15 @@ module.exports = React.createClass
       </div>
 
       <div className='col-md-5'>
-        <ResponseInfo
-          response={browser.response}/>
+        {switch
+          when browser.response?.error?
+            <ErrorPanel errorText={browser.response.error}/>
+          when browser.response?
+            <ResponseInfo response={browser.response}/>
+          when browser.currentRequest?
+            <RunningPanel/>
+          else
+            <div/>
+        }
       </div>
     </div>

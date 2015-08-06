@@ -12,6 +12,8 @@ module.exports = Model.extend
     method: 'string'
     headers: 'object'
     url: 'string'
+    # NOTE: in case of error only 'error' is set!
+    error: 'string'
 
   derived:
     statusText:
