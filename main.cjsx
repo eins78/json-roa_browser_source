@@ -15,9 +15,10 @@ app.extend
     @browser = new Browser(window.location.hash.slice(1), parse: true)
 
     # whenever the url hash changes, update model and run the request:
-    hashchange.update (hashFragment)=>
+    @onHashChange = (hashFragment)=>
       @browser.set(requestConfig: urlQuery.parse(hashFragment))
       @browser.runRequest()
+    hashchange.update(@onHashChange)
 
     # init react view (auto-refreshes on model changes):
     React.render(<AppView app={app}/>, document.body)

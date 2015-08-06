@@ -1,5 +1,6 @@
 # browser Model - browser.js
 Model = require('ampersand-state')
+app = require('ampersand-app')
 parseHeaders = require('parse-headers')
 hashchange = require('hashchange')
 urlQuery = require('qs')
@@ -31,13 +32,15 @@ module.exports = Model.extend({
 
   # instance methods:
   save: ()->
+    # add and remove event listener to not trigger while saving
+    hashchange.unbind(app.onHashChange)
     hashchange.updateHash(urlQuery.stringify(@requestConfig.serialize()))
+    setTimeout((-> hashchange.update(app.onHashChange)), 10) # "next tick"
 
   clear: () ->
     @currentRequest?.abort()
     @requestConfig.clear()
     Model::clear.call(@)
-    @save()
 
   runRequest: ()->
 
