@@ -9,7 +9,7 @@ module.exports = React.createClass
   render: ()->
     {response} = @props
 
-    level = 'success' # TODO: from response code
+    level = if response.statusCode < 400 then 'success' else 'danger'
     panelClass = "panel panel-#{level}"
     labelClass = "label label-#{level}"
 
