@@ -20,7 +20,7 @@ module.exports = Model.extend
 
     headersText:
       deps: ['headers'],
-      fn: ()-> f(stringifyHeaders(@headers)).presence()
+      fn: ()-> f(stringifyHeaders(@headers), padding: true).presence()
 
     jsonRaw:
       deps: ['body']
