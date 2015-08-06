@@ -9,7 +9,15 @@ module.exports = React.createClass
   render: ()->
     browser = @props.app.browser
 
-    <div className='app container-fluid'>
-      <h1>JSON-ROA Browser</h1>
-      <Browser browser={browser}/>
+    <div>
+      <nav className="navbar navbar-default navbar-static-top">
+        <div className="container-fluid">
+           <div className="navbar-header">
+            <h1>JSON-ROA Hypermedia API Browser</h1>
+          </div>
+        </div>
+      </nav>
+      <div className='app container-fluid'>
+        <Browser browser={browser}/>
+      </div>
     </div>
