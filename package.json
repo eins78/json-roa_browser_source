@@ -40,6 +40,7 @@
     "coffee-script": "^1.9.3",
     "css-loader": "^0.15.6",
     "html-webpack-plugin": "^1.6.0",
+    "html-webpack-template": "^2.4.0",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
     "typopro-web": "^3.2.4",
