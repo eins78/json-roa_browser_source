@@ -30,4 +30,4 @@ module.exports = Model.extend
 
     jsonRoaRaw:
       deps: ['body']
-      fn: ()-> f(this.body).pick(ROA_PROP).presence()
+      fn: ()-> f(this.body).get(ROA_PROP)
