@@ -18,10 +18,11 @@ module.exports = Model.extend
   #    relations, collection, name, and self-relation."
   props:
     version: {type: 'string', require: true}
+    name: 'string'
 
-    # collection: RoaCollection
-    # name: RoaName
-    # 'self-relation': RoaSelfRelation
+  # TODO: maybe 'children' would be better, but it initiates even when empty o_O
+    'self-relation': RoaRelation
+    collection: RoaCollection
 
   collections:
     relations: RoaRelations
