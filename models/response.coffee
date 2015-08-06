@@ -1,27 +1,55 @@
 Model = require('ampersand-state')
+app = require('ampersand-app')
 httpStatusText = require('node-status-codes')
+SemVer = require('semver')
 f = require('../lib/fun')
 stringifyHeaders = require('../lib/stringify-http-headers')
 
 RoaObject = require('./roa-object')
-
+ROA_TYPE = 'application/json-roa+json'
 ROA_PROP = '_json-roa'
+ROA_VERSION = SemVer('1.0.0')
 
 module.exports = Model.extend
   initialize: () ->
-    @roaObject= new RoaObject(@jsonRoaRaw)
+    semver = (try SemVer(@jsonRoaRaw.version))
+    roaError = switch
+      when not @jsonRoaRaw?
+        'No JSON-ROA data!'
+      when not f(@headers['content-type']).startsWith(ROA_TYPE)
+        'Response does not have JSON-ROA content-type'
+      when not semver?
+        'JSON-ROA version not valid SemVer: ' + @jsonRoaRaw.version
+      when not (semver.major is ROA_VERSION.major)
+        'Not compatible to JSON-ROA version ' + semver.version
+
+    # fail hard if error
+    if roaError?
+      return @roaError = roaError
+
+    # trigger warnings
+    if semver.compare(ROA_VERSION) < 0
+      app.trigger('warning', 'JSON-ROA Version newer than expected')
+
+    # all prechecks are done, try to init models and catch errors as well
+    try
+      @roaObject = new RoaObject(@jsonRoaRaw, parse: true)
+    catch error
+      @roaError = error.toString()
+
 
   props:
+    # NOTE: in case of request error only 'error' is set!
+    error: 'string'
+
     body: 'any'
     statusCode: 'number'
     method: 'string'
     headers: 'object'
     url: 'string'
-    # NOTE: in case of error only 'error' is set!
-    error: 'string'
 
-  children:
     roaObject: RoaObject
+    roaError: 'string'
 
   derived:
     statusText:
