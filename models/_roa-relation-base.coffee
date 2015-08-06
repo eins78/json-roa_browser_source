@@ -5,19 +5,28 @@ f = require('lodash')
 # but it is the base for RoaRelation and RoaMetaRelation!
 
 module.exports = Model.extend
-  idAttribute: 'href'
   # > "A relation is an object which must contain the key href.
   #    It may contain the keys embedded, name, methods, and relations."
+  idAttribute: 'keyName'
   props:
-    id: 'string' # Relation Identifier, originally key of relation in relations
+    keyName: 'string' # Relation Identifier, from key of relation in relations
     href:
       type: 'string'
       required: true
       default: null
-    embedded: 'string'
     name:
       type: 'string'
-      # default: -> @id
+      default: -> @keyName
     methods:
       type: 'object' # allowed keys 'get, put, patch, post, and delete'
       default: -> {get: {}}
+
+    # experimental:
+    embedded: 'any'
+
+  extraProperties: 'reject'
+
+  derived:
+    title:
+      deps: ['keyName', 'name']
+      fn: ()-> @name or @keyName

@@ -1,27 +1,29 @@
 # roaResponse Model - roa-response.js
 Model = require('ampersand-state')
-f = require('lodash')
+f = require('../lib/fun')
+parseRoaTree = require('../lib/roa-transform-tree')
 
-RoaRelations = require('./roa-relation-collection')
+RoaRelation = require('./roa-relation')
+RoaRelations = require('./roa-relations')
+RoaCollection = require('./roa-collection')
 
 module.exports = Model.extend
   type: 'RoaObject'
-  initialize: (data)->
-    # map from object to array, using key as 'id'
-    relations = f.map(data.relations, (val, key)-> f.assign(val, {id: key}))
-    @relations = new RoaRelations(relations)
 
-  props:
+  parse: (givenData)-> parseRoaTree(givenData)
+
   # > "A minimal valid JSON-ROA extension must contain the key version
   #    where the value must be formatted according to Semantic Versioning."
-    version:
-      type: 'string' # TODO: add type semver
-      require: true
-
-  # > "It may further contain the keys
+  #    It may further contain the keys
   #    relations, collection, name, and self-relation."
-  children:
-    relations: RoaRelations
+  props:
+    version: {type: 'string', require: true}
+
     # collection: RoaCollection
     # name: RoaName
     # 'self-relation': RoaSelfRelation
+
+  collections:
+    relations: RoaRelations
+
+  extraProperties: 'reject'
