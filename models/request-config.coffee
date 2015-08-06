@@ -9,4 +9,9 @@ module.exports = Model.extend
     headers:
       type: 'string'
       default: 'Accept: application/json-roa+json\n'
-      required: false
+    user:
+      type: 'string'
+      default: undefined
+    pass:
+      type: 'string'
+      default: undefined

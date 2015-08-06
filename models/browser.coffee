@@ -53,6 +53,8 @@ module.exports = Model.extend({
       method: 'GET'
       url: @requestConfig.url
       headers: parseHeaders(@requestConfig.headers)
+      # username: @requestConfig.user
+      # password: @requestConfig.pass
     }
 
     @currentRequest = curl opts, (err, res)=>
