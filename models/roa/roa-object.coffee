@@ -1,7 +1,6 @@
 # roaResponse Model - roa-response.js
 Model = require('ampersand-state')
-f = require('../lib/fun')
-parseRoaTree = require('../lib/roa-transform-tree')
+parseRoaTree = require('../../lib/roa-transform-tree')
 
 RoaRelation = require('./roa-relation')
 RoaRelations = require('./roa-relations')
