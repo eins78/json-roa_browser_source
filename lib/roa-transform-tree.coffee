@@ -5,7 +5,8 @@ f = require('./fun')
 module.exports = (data)->
   f.merge {}, transformRoaRelations(data),
     collection: transformRoaRelations(data?.collection)
-    'self-relation': transformRoaRelations(data?['self-relation'])
+    'self-relation': if (self=data?['self-relation'])?
+      f.set(transformRoaRelations(self), 'keyName', 'self-relation')
 
 
 transformRoaRelations = (data)->
