@@ -125,3 +125,53 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     tr:last-child { border-bottom: 1px solid #DDD }
   }
 }
+
+// - indicate with dark shadows when scrolling
+// NOTE: based on http://lea.verou.me/2012/04/background-attachment-local/
+pre.pre-scrollable {
+  // show up to 20 lines
+  max-height: 20em;
+
+  // otherwise no effect on single-line text!
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+
+  // make it scroll in both axis, in all browsers:
+  word-break: normal;
+  word-wrap: normal;
+
+  background-color: #FFF;
+  background-repeat: no-repeat;
+  background-image:
+    // Shadow covers
+    //   top and bottom
+    linear-gradient(to right, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 0)),
+    linear-gradient(to left, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 0)),
+    //   left and right
+    linear-gradient(to bottom, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 0)),
+    linear-gradient(to top, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 0)),
+
+    // Shadows
+    //   left and right
+    radial-gradient(farthest-side at 0 50%, rgba(0,0,0,.2), rgba(0,0,0,0)),
+    radial-gradient(farthest-side at 100% 50% , rgba(0,0,0,.2), rgba(0,0,0,0)),
+    //   top and bottom
+    radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0));
+
+  background-position:
+    0% 0%, 100% 100%,
+    0% 0%, 100% 100%,
+    0% 0%, 100% 100%,
+    0% 0%, 100% 100%;
+  background-size:
+    2em 100%, 2em 100%,
+    100% 2em, 100% 2em,
+    1em 100%, 1em 100%,
+    100% 1em, 100% 1em;
+  background-attachment:
+    local, local,
+    local, local,
+    scroll, scroll,
+    scroll, scroll;
+}

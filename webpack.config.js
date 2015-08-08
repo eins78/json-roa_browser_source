@@ -1,3 +1,4 @@
+var autoPrefixer = require('autoprefixer-core')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -59,6 +60,8 @@ module.exports = {
       }
     ]
   },
+
+  postcss: [autoPrefixer()],
 
   plugins: [
     // generate a simple index.html referencing all entries
