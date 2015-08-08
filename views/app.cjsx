@@ -12,9 +12,7 @@ module.exports = React.createClass
     <div>
       <nav className="navbar navbar-default navbar-static-top">
         <div className="container-fluid">
-           <div className="navbar-header">
-            <h1>JSON-ROA Hypermedia API Browser</h1>
-          </div>
+          <h1>JSON-ROA Hypermedia API Browser</h1>
         </div>
       </nav>
       <div className='app container-fluid'>
