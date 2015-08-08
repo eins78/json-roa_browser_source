@@ -85,8 +85,8 @@ module.exports = React.createClass
               onChange={f.curry(@updateConfigKey)('url')}
               placeholder="Enter the URL of a JSON-ROA enabled API here!"/>
             <span className="input-group-btn">
-              <button className="btn btn-primary" id="get" type="submit">
-                GET
+              <button className="btn btn-success" id="get" type="submit">
+                <samp>GET</samp>
               </button>
             </span>
           </div>
