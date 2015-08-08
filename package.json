@@ -23,6 +23,7 @@
     "ampersand-react-mixin": "^0.1.4",
     "ampersand-state": "^4.5.6",
     "bootstrap": "^3.3.5",
+    "font-awesome": "^4.4.0",
     "hashchange": "^1.0.0",
     "lodash": "^3.10.1",
     "nets": "^3.1.0",

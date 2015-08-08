@@ -5,6 +5,8 @@ module.exports = React.createClass
   render: ()->
     <div className='panel panel-warning'>
       <div className='panel-heading'>
-        <h3>Running…</h3>
+        <h3>
+          <i className='fa fa-circle-o-notch fa-spin'/> Running…
+        </h3>
       </div>
     </div>

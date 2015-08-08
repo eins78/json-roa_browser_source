@@ -1,6 +1,5 @@
 React = require('react')
 Btn = require('react-bootstrap/lib/Button')
-Icon = require('react-bootstrap/lib/Glyphicon')
 ampersandReactMixin = require 'ampersand-react-mixin'
 f = require('../../lib/fun')
 
@@ -24,7 +23,7 @@ module.exports = React.createClass
         <h3>Request
           <div className="btn-group btn-group-xs pull-right" role="group">
             <Btn title='reset' onClick={@onClearClick}>
-              <Icon glyph='trash'/></Btn>
+              <i className='fa fa-trash'/></Btn>
           </div>
         </h3>
       </div>
