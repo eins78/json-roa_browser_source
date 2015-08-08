@@ -26,7 +26,7 @@ module.exports = React.createClass
 
     <div className='app--browser row'>
 
-      <div className='col-md-7'>
+      <div className='col-sm-7'>
         <RequestConfig
           config={browser.requestConfig}
           onSubmit={@onRequestSubmit}
@@ -42,7 +42,7 @@ module.exports = React.createClass
         }
       </div>
 
-      <div className='col-md-5'>
+      <div className='col-sm-5'>
         {switch
           when browser.response?.error?
             <ErrorPanel title='Request Error!'
