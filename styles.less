@@ -1,7 +1,8 @@
 @import '~typopro-web/web/TypoPRO-SourceCodePro/TypoPRO-SourceCodePro-Medium.css';
-@import '~typopro-web/web/TypoPRO-SourceCodePro/TypoPRO-SourceCodePro-Bold.css';
-@import '~typopro-web/web/TypoPRO-SourceSansPro/TypoPRO-SourceSansPro-Bold.css';
+@import '~typopro-web/web/TypoPRO-SourceCodePro/TypoPRO-SourceCodePro-Semibold.css';
 @import '~typopro-web/web/TypoPRO-SourceSansPro/TypoPRO-SourceSansPro-Regular.css';
+@import '~typopro-web/web/TypoPRO-SourceSansPro/TypoPRO-SourceSansPro-Semibold.css';
+@import '~typopro-web/web/TypoPRO-SourceSansPro/TypoPRO-SourceSansPro-Black.css';
 
 @import "~font-awesome/css/font-awesome.css";
 
@@ -49,17 +50,29 @@
 
 
 // bootstrap vars
+// @body-bg: lightyellow;
 @pre-bg: @body-bg;
+@input-bg: @body-bg;
+@panel-bg: @body-bg;
+@list-group-bg: @body-bg;
 @font-family-monospace: 'Source Code Pro', 'TypoPRO Source Code Pro', monospace;
 @font-family-sans-serif: 'Source Sans Pro', 'TypoPRO Source Sans Pro', sans-serif;
+@font-size-base: 14px;
 @headings-font-weight: 700;
 
-body {
-  // background: lightsalmon;
+pre, samp, code, input, textarea {
+  font-family: @font-family-monospace;
+  font-weight: 500;
 }
 
-input, textarea {
-  font-family: @font-family-monospace
+b, strong,
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-weight: 600
+}
+
+.navbar h1 {
+  margin-top: 10px;
+  font-weight: 800;
 }
 
 .panel {
