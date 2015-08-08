@@ -6,10 +6,11 @@ module.exports = Model.extend
   type: 'RoaCollection'
   # > "The collection object must contain a relations key which contains
   #    as described in the section relations object."
-  props:
+  collections:
     relations: RoaRelations
   # > "The collection can contain a next key with the value of a relation object
   #   with the following restriction: the included url may not be templated."
+  children:
     next: RoaRelation
 
   extraProperties: 'reject'

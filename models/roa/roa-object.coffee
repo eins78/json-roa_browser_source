@@ -20,7 +20,8 @@ module.exports = Model.extend mixinTypeSemver,
     version: {type: 'semver', required: true}
     name: 'string'
 
-  # TODO: maybe 'children' would be better, but it initiates even when empty o_O
+  # TODO: dont init when empty
+  children:
     'self-relation': RoaRelation
     collection: RoaCollection
 
