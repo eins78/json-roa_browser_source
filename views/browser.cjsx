@@ -4,6 +4,7 @@ RequestConfig = require('./browser/request-config')
 ResponseInfo = require('./browser/response-info')
 ErrorPanel = require('./browser/error-panel')
 RunningPanel = require('./browser/running-panel')
+RoaObject = require('./browser/roa/roa-object')
 DataPanel = require('./data-panel')
 
 # API Browser UI –
@@ -32,10 +33,10 @@ module.exports = React.createClass
           onSubmit={@onRequestSubmit}
           onClear={@onClear}
           onConfigChange={@onRequestConfigChange}/>
+
         {switch
           when (roaObject = browser.response?.roaObject)?
-            <DataPanel title="ROA Parsed"
-              text={require('js-yaml').safeDump(roaObject.serialize())}/>
+            <RoaObject roaObject={roaObject}/>
           when (roaError = browser.response?.roaError)?
             <ErrorPanel title="ROA Error!"
               errorText={roaError}/>
