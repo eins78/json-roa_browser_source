@@ -1,2 +1,0 @@
-%a.relation.method.method-delete.btn.btn-danger.btn-xs{href: @href, data: {method: 'delete'}}
-  DELETE

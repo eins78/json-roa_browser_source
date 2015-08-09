@@ -1,9 +1,0 @@
-%tr.relation-row
-  %td.rel-name= @relName
-  %td.title= @title
-  %td.meta-relations
-    %ul.list-unstyled.list-inline
-      - for k, rel of @metaRelations
-        != JST['relation/meta_relation_item']({rel: rel,name: (rel.name || k)})
-  %td.methods
-    != JST['relation/row_methods']({href: @href,methods: @methods})

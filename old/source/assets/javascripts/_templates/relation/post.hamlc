@@ -1,2 +1,0 @@
-%a.relation.method.method-put.btn.btn-warning.btn-xs{href: @href, data: {method: 'post'}}
-  POST

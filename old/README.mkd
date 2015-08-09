@@ -1,6 +1,0 @@
-The JSON-ROA Browser
-====================
-
-Read more [here](source/about.html.mkd).
-
-
