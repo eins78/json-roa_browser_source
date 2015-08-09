@@ -13,6 +13,7 @@ ROA_VERSION = SemVer('1.0.0')
 module.exports = Model.extend
   initialize: () ->
     semver = (try SemVer(@jsonRoaRaw.version))
+    # TODO: move to roa object model
     roaError = switch
       when not @jsonRoaRaw?
         'No JSON-ROA data!'
@@ -35,7 +36,7 @@ module.exports = Model.extend
     try
       @roaObject= new RoaObject(f.assign({}, @jsonRoaRaw, url: @url), parse: on)
     catch error
-      @roaError = error.toString()
+      @roaError= error.toString()
 
 
   props:

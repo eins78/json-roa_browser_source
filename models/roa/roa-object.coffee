@@ -12,11 +12,11 @@ module.exports = Model.extend mixinTypeSemver,
 
   parse: (givenData)-> parseRoaTree(givenData)
 
-  # > "A minimal valid JSON-ROA extension must contain the key version
-  #    where the value must be formatted according to Semantic Versioning."
-  #    It may further contain the keys
-  #    relations, collection, name, and self-relation."
   props:
+    # > "A minimal valid JSON-ROA extension must contain the key version
+    #    where the value must be formatted according to Semantic Versioning."
+    #    It may further contain the keys
+    #    relations, collection, name, and self-relation."
     version: {type: 'semver', required: true}
     name: 'string'
     # The URL of the object itself (where it comes from) is also needed
