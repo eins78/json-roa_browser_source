@@ -1,9 +1,10 @@
 React = require('react')
+ampersandReactMixin = require('ampersand-react-mixin')
 Button = require('react-bootstrap/lib/Button')
 ButtonGroup = require('react-bootstrap/lib/ButtonGroup')
 ListGroup = require('react-bootstrap/lib/ListGroup')
 ListGroupItem = require('react-bootstrap/lib/ListGroupItem')
-ampersandReactMixin = require 'ampersand-react-mixin'
+Icon = require('../../icon')
 f = require('../../../lib/fun')
 
 module.exports = React.createClass
@@ -13,7 +14,7 @@ module.exports = React.createClass
   render: ()->
     roa = @props.roaObject
 
-    <div className='app--browser--roa-object panel panel-info'>
+    <div className='panel panel-info'>
       <div className='panel-heading'>
         <h3>ROA Object</h3>
       </div>
@@ -80,7 +81,7 @@ RoaRelationListItem = React.createClass
           {relation.relations.map (metaRel)->
             <li key={metaRel.getId()}>
               <a href={metaRel.href}>
-                <i className='fa fa-link fa-rotate-90'/>{metaRel.title}</a>
+                <Icon icon='link fa-rotate-90'/>{metaRel.title}</a>
             </li>
           }
         </ul>

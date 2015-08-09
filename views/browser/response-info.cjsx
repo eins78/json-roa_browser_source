@@ -13,9 +13,9 @@ module.exports = React.createClass
     panelClass = "panel panel-#{level}"
     labelClass = "label label-#{level}"
 
-    <div className={'app--browser--response ' + panelClass}>
+    <div className={panelClass}>
 
-      <div className='response-status panel-heading'>
+      <div className='panel-heading'>
         <h3>Response <samp className={labelClass}>
           <strong>{response.statusCode}</strong> {response.statusText}</samp></h3>
       </div>

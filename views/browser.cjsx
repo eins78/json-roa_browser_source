@@ -52,8 +52,6 @@ module.exports = React.createClass
             <ResponseInfo response={browser.response}/>
           when browser.currentRequest?
             <RunningPanel/>
-          else
-            <div/>
         }
       </div>
     </div>

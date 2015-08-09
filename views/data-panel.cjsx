@@ -1,6 +1,7 @@
 React = require('react')
-Btn = require('react-bootstrap/lib/Button')
 stringify = require('json-stringify-pretty-compact')
+Btn = require('react-bootstrap/lib/Button')
+Icon = require('./icon')
 
 module.exports = React.createClass
   displayName: 'DataPanel'
@@ -22,7 +23,6 @@ module.exports = React.createClass
     width = 60
 
     # if no text given, stringify data
-    # TODO: toggle raw view
     text ||= if dataObj? then (try stringify(dataObj, maxLength: width))
     text ||= '[No Data]'
 
@@ -32,17 +32,17 @@ module.exports = React.createClass
     preClass = if expanded then '' else 'pre-scrollable'
 
     openToggle = if open
-      <Btn title='close' onClick={@onCloseClick}><i className='fa fa-chevron-up'/></Btn>
+      <Btn title='close' onClick={@onCloseClick}><Icon icon='chevron-up'/></Btn>
     else
-      <Btn title='open' onClick={@onOpenClick}><i className='fa fa-chevron-down'/></Btn>
+      <Btn title='open' onClick={@onOpenClick}><Icon icon='chevron-down'/></Btn>
 
     expandToggle = if exandable
       if expanded
         <Btn title='collapse'onClick={@onCollapseClick} disabled={not open}>
-          <i className='fa fa-compress'/></Btn>
+          <Icon icon='compress'/></Btn>
       else
         <Btn title='expand'onClick={@onExpandClick} disabled={not open}>
-          <i className='fa fa-expand'/></Btn>
+          <Icon icon='expand'/></Btn>
 
 
     <li id={id} className={'list-group-item ' + itemClass}>

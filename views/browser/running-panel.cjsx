@@ -1,4 +1,5 @@
 React = require('react')
+Icon = require('../icon')
 
 module.exports = React.createClass
   displayName: 'RunningPanel'
@@ -6,7 +7,7 @@ module.exports = React.createClass
     <div className='panel panel-warning'>
       <div className='panel-heading'>
         <h3>
-          <i className='fa fa-circle-o-notch fa-spin'/> Running…
+          <Icon icon='circle-o-notch fa-spin'/> Running…
         </h3>
       </div>
     </div>

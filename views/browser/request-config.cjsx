@@ -1,6 +1,8 @@
 React = require('react')
-Btn = require('react-bootstrap/lib/Button')
 ampersandReactMixin = require 'ampersand-react-mixin'
+Btn = require('react-bootstrap/lib/Button')
+BtnGroup = require('react-bootstrap/lib/ButtonGroup')
+Icon = require('../icon')
 f = require('../../lib/fun')
 
 module.exports = React.createClass
@@ -14,21 +16,23 @@ module.exports = React.createClass
   updateConfigKey: (key, event) ->
     @props.onConfigChange(key, event.target.value)
 
+  onSubmit: (event)-> @props.onSubmit?(event)
+
   render: ()->
     conf = @props.config
     SHOW_BASIC_AUTH = false # TMP, does only make sense in special cases.
 
-    <div className='app--browser--request panel panel-default'>
+    <div className='panel panel-default'>
       <div className='panel-heading'>
         <h3>Request
-          <div className="btn-group btn-group-xs pull-right" role="group">
+          <BtnGroup bsSize='xs' className='pull-right'>
             <Btn title='reset' onClick={@onClearClick}>
-              <i className='fa fa-trash'/></Btn>
-          </div>
+              <Icon icon='trash'/></Btn>
+          </BtnGroup>
         </h3>
       </div>
 
-      <form id="request-form" role="form" onSubmit={@props.onSubmit}>
+      <form role="form" onSubmit={@onSubmit}>
 
         <div className='panel-body'>
         <div className='row'>
@@ -44,34 +48,9 @@ module.exports = React.createClass
           </div>
           </div>
 
-          {SHOW_BASIC_AUTH &&
-            <div className='col-md-5'>
-              <div className="form-group">
-                <label>Basic Authentication</label>
-
-                <div className='form-horizontal'>
-                  <div className="form-group form-group-sm">
-                    <label htmlFor="exampleInputName2" className='col-sm-2'>user</label>
-                    <div className='col-sm-10'>
-                    <input type="text" className="form-control"
-                      id="exampleInputName2" placeholder="Username"
-                      value={conf.user}
-                      onChange={f.curry(@updateConfigKey)('user')}/>
-                    </div>
-                  </div>
-                  <div className="form-group form-group-sm">
-                    <label htmlFor="exampleInputName2" className='col-sm-2'>pass</label>
-                    <div className='col-sm-10'>
-                    <input type="password" className="form-control"
-                      id="exampleInputName2" placeholder="Password"
-                      value={conf.pass}
-                      onChange={f.curry(@updateConfigKey)('pass')}/>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          }
+          {SHOW_BASIC_AUTH && <div className='col-md-5'>
+            <BasicAuthConf updateConfigKey={@updateConfigKey}/>
+          </div>}
         </div>
         </div>
 
@@ -94,4 +73,33 @@ module.exports = React.createClass
         </div>
 
       </form>
+    </div>
+
+
+BasicAuthConf = React.createClass
+  mixins: [ampersandReactMixin]
+  render: ()->
+    <div className="form-group">
+      <label>Basic Authentication</label>
+
+      <div className='form-horizontal'>
+        <div className="form-group form-group-sm">
+          <label htmlFor="exampleInputName2" className='col-sm-2'>user</label>
+          <div className='col-sm-10'>
+          <input type="text" className="form-control"
+            id="exampleInputName2" placeholder="Username"
+            value={conf.user}
+            onChange={f.curry(@updateConfigKey)('user')}/>
+          </div>
+        </div>
+        <div className="form-group form-group-sm">
+          <label htmlFor="exampleInputName2" className='col-sm-2'>pass</label>
+          <div className='col-sm-10'>
+          <input type="password" className="form-control"
+            id="exampleInputName2" placeholder="Password"
+            value={conf.pass}
+            onChange={f.curry(@updateConfigKey)('pass')}/>
+          </div>
+        </div>
+      </div>
     </div>
