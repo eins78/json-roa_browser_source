@@ -1,11 +1,12 @@
 React = require('react')
-libUrl = require('url')
 ampersandReactMixin = require('ampersand-react-mixin')
 Button = require('react-bootstrap/lib/Button')
 ButtonGroup = require('react-bootstrap/lib/ButtonGroup')
 ListGroup = require('react-bootstrap/lib/ListGroup')
 ListGroupItem = require('react-bootstrap/lib/ListGroupItem')
 Icon = require('../../icon')
+
+libUrl = require('url')
 f = require('../../../lib/fun')
 
 module.exports = React.createClass
@@ -30,7 +31,9 @@ module.exports = React.createClass
 
 RoaSelfRelation = React.createClass
   render: ()->
-    return null unless (selfRelation = @props.selfRelation)?
+    {selfRelation} = @props
+    return null unless selfRelation.getId()?
+
     <ListGroupItem header='Self'>
       <RoaRelationList url={@props.url} relations={[selfRelation]}/>
     </ListGroupItem>
@@ -56,13 +59,13 @@ RoaRelations = React.createClass
 
 RoaRelationList = React.createClass
   render: ()->
-    relationList = @props.relations
-    url = @props.url
-    return null unless relationList?.length > 0
+    {relations, url} = @props
+    return null unless relations?.length > 0
+
     <div className='table-responsive'>
       <table className='table table-striped table-condensed'><thead></thead>
         <tbody>
-          {relationList.map (relation)->
+          {relations.map (relation)->
             <RoaRelationListItem relation={relation} url={url} key={relation.getId()}/>
           }
         </tbody>
@@ -98,7 +101,7 @@ RoaRelationListItem = React.createClass
 
 MethodButtons = React.createClass
   render: ()->
-    styleMap =
+    styleMap = # bootstrap levels
       get: 'success'
       post: 'primary'
       put: 'info'
