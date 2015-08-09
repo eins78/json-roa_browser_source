@@ -33,7 +33,7 @@ module.exports = Model.extend
 
     # all prechecks are done, try to init models and catch errors as well
     try
-      @roaObject = new RoaObject(@jsonRoaRaw, parse: true)
+      @roaObject= new RoaObject(f.assign({}, @jsonRoaRaw, url: @url), parse: on)
     catch error
       @roaError = error.toString()
 

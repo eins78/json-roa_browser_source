@@ -19,6 +19,8 @@ module.exports = Model.extend mixinTypeSemver,
   props:
     version: {type: 'semver', required: true}
     name: 'string'
+    # The URL of the object itself (where it comes from) is also needed
+    url: {type: 'string', required: true}
 
   # TODO: dont init when empty
   children:
