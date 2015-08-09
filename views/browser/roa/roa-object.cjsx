@@ -8,10 +8,24 @@ Icon = require('../../icon')
 
 libUrl = require('url')
 f = require('../../../lib/fun')
+uriTemplates = require('../../../lib/uri-templates')
+isLocalClick = require('../../../lib/local-clicks')
 
 module.exports = React.createClass
   displayName: 'RoaObject'
   mixins: [ampersandReactMixin]
+
+  onClick: (event, config) ->
+    # NOTE: attach just 1 event handler and use real links for internal nav.
+
+    # Only handle click meant to be internal by user:
+    # NOTE: cant use `local-links` here because link target is irrelevant.
+    return unless isLocalClick(event)
+    event.preventDefault()
+
+    # find href (simple because we dont nest children in buttons)
+    href = event.target.href or event.target.parentNode.href
+    @props.onMethodSubmit(href) # callback to brower
 
   render: ()->
     roa = @props.roaObject
@@ -21,7 +35,7 @@ module.exports = React.createClass
         <h3>ROA Object</h3>
       </div>
 
-      <ListGroup>
+      <ListGroup onClick={@onClick}>
         <RoaSelfRelation selfRelation={roa.get('self-relation')} url={roa.url}/>
         <RoaCollection collection={roa.get('collection')} url={roa.url}/>
         <RoaRelations relations={roa.get('relations')} url={roa.url}/>
@@ -76,9 +90,14 @@ RoaRelationListItem = React.createClass
   render: ()->
     {relation, url} = @props
 
+    console.log relation.serialize() unless url? or relation.href?
+
     methods = f.mapValues relation.methods, (obj)->
-      # TODO: relation.hasTemplatedUrl?
-      f.assign(obj, url: libUrl.resolve(url, relation.href))
+      f.assign {}, obj, if uriTemplates.isTemplated(relation.href)
+        templatedUrl: libUrl.resolve(url, relation.href)
+      else
+        url: libUrl.resolve(url, relation.href)
+
 
     <tr className='relation-row'>
       {false && <td className='col-sm-2'>
@@ -111,14 +130,20 @@ MethodButtons = React.createClass
     # sort methods like the order defined in styleMap (extra keys at the end)
     methods = f(@props.methods).sortKeysLike(f.keys(styleMap))
 
+    onMethodSubmit = @props.onMethodSubmit
+
     <ButtonGroup bsSize='xs'>
       {f.map methods, (obj, key)->
-        # TMP: disable non-GET for now:
-        disabled = not (key is 'get')
+        href = obj.url or obj.templatedUrl
+        bsStyle = styleMap[key] or 'warning' # fallback level if unknown action
+        isTemplated = obj.templatedUrl?
+        # determine if it needs a form (url template or actions needs data)
+        needsFormInput = isTemplated or not f.includes(['get', 'delete'], key)
+        # TMP: disable templated and non-GET for now:
+        disabled = isTemplated or (key != 'get')
 
-        <Button bsStyle={styleMap[key] or 'warning'} key={key}
-          href={obj.url}
-          disabled={disabled}>
+        <Button bsStyle={bsStyle} href={href} disabled={disabled} key={key}>
+          {if needsFormInput then <Icon icon='pencil-square'/>}
           <samp>{key.toUpperCase()}</samp>
         </Button>
       }

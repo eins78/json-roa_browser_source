@@ -15,8 +15,16 @@ module.exports = React.createClass
   onRequestConfigChange: (key, value)->
     @props.browser.requestConfig.set(key, value)
 
+  # when the main 'GET' button is clicked:
   onRequestSubmit: (event)-> # save config, then run request:
     event.preventDefault()
+    @props.browser.save()
+    @props.browser.runRequest()
+
+  # when a Roa methods 'GET' button (untemplated) is clicked
+  onMethodSubmit: (url)->
+    console.log url
+    @props.browser.requestConfig.url = url
     @props.browser.save()
     @props.browser.runRequest()
 
@@ -36,7 +44,7 @@ module.exports = React.createClass
 
         {switch
           when (roaObject = browser.response?.roaObject)?
-            <RoaObject roaObject={roaObject}/>
+            <RoaObject roaObject={roaObject} onMethodSubmit={@onMethodSubmit}/>
           when (roaError = browser.response?.roaError)?
             <ErrorPanel title="ROA Error!"
               errorText={roaError}/>
