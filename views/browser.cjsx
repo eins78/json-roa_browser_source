@@ -5,7 +5,6 @@ ResponseInfo = require('./browser/response-info')
 ErrorPanel = require('./browser/error-panel')
 RunningPanel = require('./browser/running-panel')
 RoaObject = require('./browser/roa/roa-object')
-DataPanel = require('./data-panel')
 
 # API Browser UI –
 module.exports = React.createClass

@@ -109,8 +109,7 @@ RoaRelationListItem = React.createClass
           {relation.relations.map (metaRel)->
             <li key={metaRel.getId()}>
               <a href={libUrl.resolve(url, metaRel.href)}>
-                <Icon icon='link fa-rotate-90'/>{metaRel.title}</a>
-            </li>
+                <Icon icon='link fa-rotate-90'/>{metaRel.title}</a></li>
           }
         </ul>
       </td>

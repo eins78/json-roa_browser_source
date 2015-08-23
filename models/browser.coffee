@@ -20,10 +20,9 @@ module.exports = Model.extend
   # properties that are only local (never serialized)
   # NOTE: When type=state, instances will be swapped out regularly (and change!)
   session:
-    response: 'state'
     currentRequest: 'object'
     lastRequest: 'object'
-    responseBody: 'object' # TMP
+    response: 'state'
 
   # run on 'create' when option parse=true
   parse: (data) ->
@@ -58,7 +57,6 @@ module.exports = Model.extend
       # password: @requestConfig.pass
     }
 
-})
     @currentRequest = f.assign {started: (new Date().getTime())},
       curl: curl opts, (err, res)=>
         @lastRequest = @currentRequest

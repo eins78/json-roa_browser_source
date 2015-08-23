@@ -4,8 +4,8 @@ httpStatusText = require('node-status-codes')
 SemVer = require('semver')
 f = require('../lib/fun')
 stringifyHeaders = require('../lib/stringify-http-headers')
-
 RoaObject = require('./roa/roa-object')
+
 ROA_TYPE = 'application/json-roa+json'
 ROA_PROP = '_json-roa'
 ROA_VERSION = SemVer('1.0.0')
