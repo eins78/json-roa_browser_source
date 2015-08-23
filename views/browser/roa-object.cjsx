@@ -4,12 +4,12 @@ Button = require('react-bootstrap/lib/Button')
 ButtonGroup = require('react-bootstrap/lib/ButtonGroup')
 ListGroup = require('react-bootstrap/lib/ListGroup')
 ListGroupItem = require('react-bootstrap/lib/ListGroupItem')
-Icon = require('../../icon')
+Icon = require('../icon')
 
 libUrl = require('url')
-f = require('../../../lib/fun')
-uriTemplates = require('../../../lib/uri-templates')
-isLocalClick = require('../../../lib/local-clicks')
+f = require('../../lib/fun')
+uriTemplates = require('../../lib/uri-templates')
+isLocalClick = require('../../lib/local-clicks')
 
 module.exports = React.createClass
   displayName: 'RoaObject'
@@ -25,6 +25,7 @@ module.exports = React.createClass
 
     # find href (simple because we dont nest children in buttons)
     href = event.target.href or event.target.parentNode.href
+    console.log href
     @props.onMethodSubmit(href) # callback to brower
 
   render: ()->
@@ -98,6 +99,7 @@ RoaRelationListItem = React.createClass
       else
         url: libUrl.resolve(url, relation.href)
 
+    console.log methods
 
     <tr className='relation-row'>
       {false && <td className='col-sm-2'>
@@ -138,6 +140,7 @@ MethodButtons = React.createClass
         isTemplated = obj.templatedUrl?
         # determine if it needs a form (url template or actions needs data)
         needsFormInput = isTemplated or not f.includes(['get', 'delete'], key)
+
         # TMP: disable templated and non-GET for now:
         disabled = isTemplated or (key != 'get')
 

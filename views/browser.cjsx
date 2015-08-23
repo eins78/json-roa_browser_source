@@ -4,7 +4,7 @@ RequestConfig = require('./browser/request-config')
 ResponseInfo = require('./browser/response-info')
 ErrorPanel = require('./browser/error-panel')
 RunningPanel = require('./browser/running-panel')
-RoaObject = require('./browser/roa/roa-object')
+RoaObject = require('./browser/roa-object')
 ActionForm = require('./browser/action-form.cjsx')
 
 # API Browser UI –
