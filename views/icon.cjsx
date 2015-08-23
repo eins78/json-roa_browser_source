@@ -4,4 +4,4 @@ module.exports = React.createClass
   displayName: 'Icon'
   render: ()->
     throw new Error('No `icon` given!') unless @props.icon?
-    <i className="fa fa-#{@props.icon}"/>
+    <i className="fa fa-fw fa-#{@props.icon}"/>
