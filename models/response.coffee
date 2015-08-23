@@ -50,18 +50,19 @@ module.exports = Model.extend
     method: 'string'
     headers: 'object'
     url: 'string'
+    runningTime: 'number'
 
     roaObject: RoaObject
     roaError: 'string'
 
   derived:
     statusText:
-      deps: ['statusCode'],
+      deps: ['statusCode']
       fn: ()-> httpStatusText[@statusCode] or 'Unknown'
 
     headersText:
-      deps: ['headers'],
-      fn: ()-> f(stringifyHeaders(@headers), padding: true).presence()
+      deps: ['headers']
+      fn: ()-> stringifyHeaders(@headers, padding: true)
 
     jsonRaw:
       deps: ['body']
