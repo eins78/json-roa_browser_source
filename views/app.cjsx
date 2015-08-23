@@ -15,7 +15,7 @@ module.exports = React.createClass
           <h1>JSON-ROA Hypermedia API Browser</h1>
         </div>
       </nav>
-      <div className='app container-fluid'>
+      <div className='app'>
         <Browser browser={browser}/>
       </div>
     </div>
