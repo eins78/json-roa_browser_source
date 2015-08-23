@@ -10,11 +10,17 @@ module.exports = React.createClass
   displayName: 'RequestConfig'
   mixins: [ampersandReactMixin]
 
+  getInitialState: ()-> {formData: {}}
+
   # event handlers:
   onClearClick: (_event) -> @props.onClear()
 
   updateConfigKey: (key, event) ->
-    @props.onConfigChange(key, event.target.value)
+    value = event.target.value
+    # set internal state so UI does not hang
+    @setState(formData: f.set(f.clone(@state.formData), key, value))
+    # callback parent (saves config to model)
+    @props.onConfigChange(key, value)
 
   onSubmit: (event)-> @props.onSubmit?(event)
 
