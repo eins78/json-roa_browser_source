@@ -20,6 +20,7 @@ module.exports = Model.extend
   # properties that are only local (never serialized)
   # NOTE: When type=state, instances will be swapped out regularly (and change!)
   session:
+    formAction: 'object'
     currentRequest: 'object'
     lastRequest: 'object'
     response: 'state'

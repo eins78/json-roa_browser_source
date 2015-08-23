@@ -5,6 +5,7 @@ ResponseInfo = require('./browser/response-info')
 ErrorPanel = require('./browser/error-panel')
 RunningPanel = require('./browser/running-panel')
 RoaObject = require('./browser/roa/roa-object')
+ActionForm = require('./browser/action-form.cjsx')
 
 # API Browser UI –
 module.exports = React.createClass
@@ -27,6 +28,9 @@ module.exports = React.createClass
     @props.browser.save()
     @props.browser.runRequest()
 
+  onFormActionCancel: ()->
+    @props.browser.unset('formAction')
+
   onClear: ()-> @props.browser.clear()
 
   render: ()->
@@ -34,6 +38,11 @@ module.exports = React.createClass
 
     <div className='modal-container'>
 
+      {if browser.formAction?
+        <ActionForm form={browser.formAction}
+          onClose={@onFormActionCancel}
+          container={this}/>
+      }
 
       <div className='app--browser container-fluid row'>
 
