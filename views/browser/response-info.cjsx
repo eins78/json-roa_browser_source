@@ -1,6 +1,7 @@
 React = require('react')
 ampersandReactMixin = require 'ampersand-react-mixin'
 DataPanel = require('../data-panel')
+Icon = require('../icon')
 
 module.exports = React.createClass
   displayName: 'ResponseInfo'
@@ -16,8 +17,10 @@ module.exports = React.createClass
     <div className={panelClass}>
 
       <div className='panel-heading'>
-        <h3>Response <samp className={labelClass}>
-          <strong>{response.statusCode}</strong> {response.statusText}</samp></h3>
+        <h3><Icon icon='file-text'/> Response <samp className={labelClass}>
+          <strong>{response.statusCode}</strong> {response.statusText}
+          </samp>
+        </h3>
       </div>
 
       <ul className="list-group">

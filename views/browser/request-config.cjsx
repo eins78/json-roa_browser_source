@@ -24,7 +24,7 @@ module.exports = React.createClass
 
     <div className='panel panel-default'>
       <div className='panel-heading'>
-        <h3>Request
+        <h3><Icon icon='server'/> Request
           <BtnGroup bsSize='xs' className='pull-right'>
             <Btn title='reset' onClick={@onClearClick}>
               <Icon icon='trash'/></Btn>
