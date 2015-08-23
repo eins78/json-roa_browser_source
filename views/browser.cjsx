@@ -59,7 +59,7 @@ module.exports = React.createClass
           when browser.response?
             <ResponseInfo response={browser.response}/>
           when browser.currentRequest?
-            <RunningPanel/>
+            <RunningPanel request={browser.currentRequest}/>
         }
       </div>
     </div>
