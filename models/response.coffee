@@ -14,9 +14,11 @@ module.exports = Model.extend
   initialize: () ->
     semver = (try SemVer(@jsonRoaRaw.version))
     # TODO: move to roa object model
+
+    # abort if no ROA object present
+    return unless @jsonRoaRaw?
+
     roaError = switch
-      when not @jsonRoaRaw?
-        'No JSON-ROA data!'
       when not f(@headers['content-type']).startsWith(ROA_TYPE)
         'Response does not have JSON-ROA content-type'
       when not semver?
