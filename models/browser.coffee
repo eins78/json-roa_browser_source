@@ -4,12 +4,13 @@ app = require('ampersand-app')
 parseHeaders = require('parse-headers')
 hashchange = require('hashchange')
 urlQuery = require('qs')
+f = require('lodash')
 curl = require('../lib/curl')
 
 RequestConfig = require('./request-config')
 Response = require('./response')
 
-module.exports = Model.extend({
+module.exports = Model.extend
   # props: NOTE: the browser has no 'props', only children, session and methods.
 
   # children: nested state; NOTE: instances are never swapped out, only changed!
@@ -38,7 +39,7 @@ module.exports = Model.extend({
     setTimeout((-> hashchange.update(app.onHashChange)), 10) # "next tick"
 
   clear: () ->
-    @currentRequest?.abort()
+    @currentRequest?.curl.abort()
     @requestConfig.clear()
     Model::clear.call(@)
 
@@ -46,7 +47,7 @@ module.exports = Model.extend({
     @response = null
 
     if @currentRequest?
-      @currentRequest.abort()
+      @currentRequest.curl.abort()
       @currentRequest = null
 
     opts = {
@@ -57,11 +58,12 @@ module.exports = Model.extend({
       # password: @requestConfig.pass
     }
 
-    @currentRequest = curl opts, (err, res)=>
-      @lastRequest = @currentRequest
-      @currentRequest = null
-      @response = unless err
-        new Response(res)
-      else
-        new Response(error: err.toString())
 })
+    @currentRequest = f.assign {started: (new Date().getTime())},
+      curl: curl opts, (err, res)=>
+        @lastRequest = @currentRequest
+        @currentRequest = null
+        @response = unless err
+          new Response(res)
+        else
+          new Response(error: err.toString())
