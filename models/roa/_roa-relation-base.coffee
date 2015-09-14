@@ -18,7 +18,7 @@ module.exports = Model.extend
       type: 'string'
       default: -> @keyName
     methods:
-      type: 'object' # allowed keys 'get, put, patch, post, and delete'
+      type: 'object' # TODO: allowed keys 'get, put, patch, post, and delete'
       default: -> {get: {}}
 
     # experimental:

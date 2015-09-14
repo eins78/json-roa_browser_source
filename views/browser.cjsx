@@ -8,7 +8,7 @@ RunningPanel = require('./browser/running-panel')
 RoaObject = require('./browser/roa-object')
 ActionForm = require('./browser/action-form.cjsx')
 
-# API Browser UI –
+# API Browser UI
 module.exports = React.createClass
   displayName: 'ApiBrowser'
   mixins: [ampersandReactMixin]
