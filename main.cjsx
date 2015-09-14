@@ -12,7 +12,7 @@ require('./styles.less')
 app.extend
   DEFAULTS: # TODO: config
     formAction:
-      contentType: 'application/json'
+      contentType: 'application/json; charset=UTF-8'
       body: '{\n  \n}'
 
   init: ()->
