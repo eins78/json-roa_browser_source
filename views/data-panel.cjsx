@@ -13,12 +13,16 @@ module.exports = React.createClass
   onCollapseClick: ()-> @setState(expanded: false)
 
   render: ()->
-    {id, title, level, text, dataObj} = @props
-    level ||= 'info'
+    {id, title, level, text, dataObj, defaultOpen, children} = @props
     {open, expanded} = @state
+    defaultOpen ||= true
 
-    # panel is open according to state, or if not set then if data is present:
-    open = if open? then open else (text? or dataObj?)
+    # panel is open according to state, or,
+    # if not set, then if data is present and props defaultOpen is not false
+    open = if open?
+      open # state
+    else
+      defaultOpen and (text? or dataObj? or children?)
 
     width = 60
 
@@ -50,15 +54,13 @@ module.exports = React.createClass
         <span onClick={open && @onCloseClick || @onOpenClick}>{title}</span>
         <div className="btn-group btn-group-xs pull-right" role="group">
           {expandToggle}
-          {openToggle}
-        </div>
+          {openToggle}</div></div>
 
-      </div>
       {if open
         <div className='list-group-item-body'>
+        {{children} if children?}
         <pre id={id} className={'source-code small ' + preClass}>
           {text}
         </pre>
-        </div>
-      }
+        </div>}
     </li>
