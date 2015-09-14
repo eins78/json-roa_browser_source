@@ -58,14 +58,19 @@ module.exports = Model.extend
     @runRequest(config)
 
   runRequest: (extraConfig = {})->
-    config = f.defaults {}, extraConfig, @requestConfig.serialize(), {
-      method: 'GET'
-      # username: @requestConfig.user
-      # password: @requestConfig.pass
-    }
-    f.assign(config, headers: parseHeaders(config.headers))
-    if f.isString(config.body)
-      f.assign(config, body: (try JSON.parse(config.body))) 
+    config = f({})
+      .defaults(extraConfig, @requestConfig.serialize(),
+        method: 'GET'
+        # username: @requestConfig.user
+        # password: @requestConfig.pass
+      )
+      .merge(
+        headers: (try parseHeaders(@requestConfig.headers))
+      ,
+        headers: (try parseHeaders(extraConfig.headers))
+        body: (try JSON.parse(extraConfig.body))
+      )
+      .value()
 
     # reset current request
     @response = null
