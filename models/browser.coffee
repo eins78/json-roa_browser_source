@@ -67,7 +67,9 @@ module.exports = Model.extend
       # username: @requestConfig.user
       # password: @requestConfig.pass
     }
-    f.assign config, headers: parseHeaders(config.headers)
+    f.assign(config, headers: parseHeaders(config.headers))
+    if f.isString(config.body)
+      f.assign(config, body: (try JSON.parse(config.body))) 
 
     # reset current request
     @response = null
