@@ -4,13 +4,15 @@ app = require('ampersand-app')
 parseHeaders = require('parse-headers')
 hashchange = require('hashchange')
 urlQuery = require('qs')
-f = require('lodash')
+f = require('../lib/fun')
 curl = require('../lib/curl')
 
 RequestConfig = require('./request-config')
 Response = require('./response')
 
 module.exports = Model.extend
+  DEFAULTS: ()-> app.DEFAULTS
+
   # props: NOTE: the browser has no 'props', only children, session and methods.
 
   # children: nested state; NOTE: instances are never swapped out, only changed!
@@ -23,7 +25,7 @@ module.exports = Model.extend
     formAction: 'object'
     currentRequest: 'object'
     lastRequest: 'object'
-    response: 'state'
+    response: Response
 
   # run on 'create' when option parse=true
   parse: (data) ->
@@ -43,26 +45,42 @@ module.exports = Model.extend
     @requestConfig.clear()
     Model::clear.call(@)
 
-  runRequest: ()->
-    @response = null
+  onRequestSubmit: (url)->
+    @requestConfig.set('url', url) if url?
+    @save()
+    @runRequest()
 
+  runFormActionRequest: (config)->
+    # build config from action Form, main Panel and app defaults:
+    config = f.defaults {}, config, @formAction, @requestConfig.serialize()
+    # set headers
+    f.assign(config.headers, contentType: config.contentType)
+    config = f.omit(config, 'contentType')
+
+    # clear the form and execute request
+    @formAction = null
+    @runRequest(config)
+
+  runRequest: (extraConfig = {})->
+    config = f.defaults {}, extraConfig, @requestConfig.serialize(), {
+      method: 'GET'
+      # username: @requestConfig.user
+      # password: @requestConfig.pass
+    }
+    f.assign config, headers: parseHeaders(config.headers)
+
+    # reset current request
+    @response = null
     if @currentRequest?
       @currentRequest.curl.abort()
       @currentRequest = null
 
-    opts = {
-      method: 'GET'
-      url: @requestConfig.url
-      headers: parseHeaders(@requestConfig.headers)
-      # username: @requestConfig.user
-      # password: @requestConfig.pass
-    }
-
+    # run and keep reference (with time), build new response when finished:
     @currentRequest = f.assign {started: (new Date().getTime())},
-      curl: curl opts, (err, res)=>
+      curl: curl config, (err, res)=>
         @lastRequest = @currentRequest
         @currentRequest = null
         @response = unless err
-          new Response(res)
+          new Response(f.assign({}, res, {requestConfig: config}))
         else
           new Response(error: err.toString())

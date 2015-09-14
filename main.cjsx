@@ -10,6 +10,11 @@ Browser = require('./models/browser')
 require('./styles.less')
 
 app.extend
+  DEFAULTS: # TODO: config
+    formAction:
+      contentType: 'application/json'
+      body: '{\n  \n}'
+
   init: ()->
     # init browser model, sets initial config from URL hash fragment:
     @browser = new Browser(window.location.hash.slice(1), parse: true)

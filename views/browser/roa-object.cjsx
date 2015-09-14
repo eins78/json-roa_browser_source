@@ -1,32 +1,25 @@
 React = require('react')
 ampersandReactMixin = require('ampersand-react-mixin')
+app = require('ampersand-app')
 Button = require('react-bootstrap/lib/Button')
 ButtonGroup = require('react-bootstrap/lib/ButtonGroup')
 ListGroup = require('react-bootstrap/lib/ListGroup')
 ListGroupItem = require('react-bootstrap/lib/ListGroupItem')
-Icon = require('../icon')
-
-libUrl = require('url')
 f = require('../../lib/fun')
-uriTemplates = require('../../lib/uri-templates')
+Icon = require('../icon')
 isLocalClick = require('../../lib/local-clicks')
+libUrl = require('url')
+uriTemplates = require('../../lib/uri-templates')
 
 module.exports = React.createClass
   displayName: 'RoaObject'
   mixins: [ampersandReactMixin]
 
   onClick: (event, config) ->
-    # NOTE: attach just 1 event handler and use real links for internal nav.
-
-    # Only handle click meant to be internal by user:
-    # NOTE: cant use `local-links` here because link target is irrelevant.
-    return unless isLocalClick(event)
-    event.preventDefault()
-
-    # find href (simple because we dont nest children in buttons)
-    href = event.target.href or event.target.parentNode.href
-    console.log href
-    @props.onMethodSubmit(href) # callback to brower
+    # TODO: attach listener for all links here
+    # (will catch all the 'Meta' links but not 'Method' buttons)
+    # if internalLink then handle link internally
+    # <ListGroup onClick={@onClick}>
 
   render: ()->
     roa = @props.roaObject
@@ -36,7 +29,7 @@ module.exports = React.createClass
         <h3>ROA Object</h3>
       </div>
 
-      <ListGroup onClick={@onClick}>
+      <ListGroup>
         <RoaSelfRelation selfRelation={roa.get('self-relation')} url={roa.url}/>
         <RoaCollection collection={roa.get('collection')} url={roa.url}/>
         <RoaRelations relations={roa.get('relations')} url={roa.url}/>
@@ -135,18 +128,31 @@ MethodButtons = React.createClass
 
     <ButtonGroup bsSize='xs'>
       {f.map methods, (obj, key)->
-        href = obj.url or obj.templatedUrl
-        bsStyle = styleMap[key] or 'warning' # fallback level if unknown action
+        bsStyle = styleMap[key] or 'warning'
         isTemplated = obj.templatedUrl?
         # determine if it needs a form (url template or actions needs data)
         needsFormInput = isTemplated or not f.includes(['get', 'delete'], key)
 
-        # TMP: disable templated and non-GET for now:
-        disabled = isTemplated or (key != 'get')
+        # TMP: dirty: actions here… move this to roa models…
+        if needsFormInput
+          icon = <Icon icon='pencil-square'/>
+          onClick = (event)->
+            app.browser.formAction = {
+              method: key.toUpperCase(),
+              url: obj.url
+              templatedUrl: obj.templatedUrl
+            }
+        else
+          href = obj.url # makes it a valid link!
+          onClick = (event, config) ->
+            # Only handle click meant to be internal by user:
+            # NOTE: cant use `local-links` here because link target is irrelevant.
+            return unless isLocalClick(event)
+            event.preventDefault()
+            app.browser.onRequestSubmit(href)
 
-        <Button bsStyle={bsStyle} href={href} disabled={disabled} key={key}>
-          {if needsFormInput then <Icon icon='pencil-square'/>}
-          <samp>{key.toUpperCase()}</samp>
+        <Button href={href} onClick={onClick} bsStyle={bsStyle} key={key}>
+          {icon} <samp>{key.toUpperCase()}</samp>
         </Button>
       }
     </ButtonGroup>

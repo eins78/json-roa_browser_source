@@ -10,6 +10,8 @@ module.exports = React.createClass
   render: ()->
     {response} = @props
 
+    console.log 'RESPONSE', response
+
     level = if response.statusCode < 400 then 'success' else 'danger'
     panelClass = "panel panel-#{level}"
     labelClass = "label label-#{level}"
@@ -24,6 +26,9 @@ module.exports = React.createClass
       </div>
 
       <ul className="list-group">
+        <DataPanel title='Request Config' dataObj={response.requestConfig}>
+          <samp><small>{response.method} {response.url}</small></samp>
+        </DataPanel>
         <DataPanel title='Headers'
             text={response.headersText} dataObj={response.headers}/>
         <DataPanel title='JSON Data' dataObj={response.jsonRaw}/>

@@ -49,6 +49,7 @@ module.exports = Model.extend
     statusCode: 'number'
     method: 'string'
     headers: 'object'
+    requestConfig: 'object'
     url: 'string'
     runningTime: 'number'
 

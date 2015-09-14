@@ -1,5 +1,6 @@
 React = require('react')
-ampersandReactMixin = require 'ampersand-react-mixin'
+ampersandReactMixin = require('ampersand-react-mixin')
+f = require('../lib/fun')
 RequestConfig = require('./browser/request-config')
 ResponseInfo = require('./browser/response-info')
 ErrorPanel = require('./browser/error-panel')
@@ -16,17 +17,12 @@ module.exports = React.createClass
     @props.browser.requestConfig.set(key, value)
 
   # when the main 'GET' button is clicked:
-  onRequestSubmit: (event)-> # save config, then run request:
-    event.preventDefault()
-    @props.browser.save()
-    @props.browser.runRequest()
+  onRequestSubmit: (event)->
+    @props.browser.onRequestSubmit()
 
-  # when a Roa methods 'GET' button (untemplated) is clicked
-  onMethodSubmit: (url)->
-    console.log url
-    @props.browser.requestConfig.url = url
-    @props.browser.save()
-    @props.browser.runRequest()
+  onFormActionSubmit: (event, config)->
+    event.preventDefault()
+    @props.browser.runFormActionRequest(config)
 
   onFormActionCancel: ()->
     @props.browser.unset('formAction')
@@ -38,9 +34,11 @@ module.exports = React.createClass
 
     <div className='modal-container'>
 
-      {if browser.formAction?
-        <ActionForm form={browser.formAction}
+      {if f.presence(browser.formAction)?
+        <ActionForm config={browser.formAction}
+          onSubmit={@onFormActionSubmit}
           onClose={@onFormActionCancel}
+          defaultFormData={browser.DEFAULTS().formAction}
           container={this}/>
       }
 
