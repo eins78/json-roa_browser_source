@@ -5,7 +5,7 @@ module.exports = React.createClass
   displayName: 'RunningPanel'
   getInitialState: ()-> {runningTime: 0}
   componentDidMount: ()->
-    @clock = setInterval(@updateClock, 100);
+    @clock = setInterval(@updateClock, 50);
   updateClock: ()->
     @setState(runningTime: ((new Date().getTime()) - @props.request.started))
   componentWillUnmount: ()->
