@@ -51,12 +51,8 @@ module.exports = Model.extend
     @runRequest()
 
   runFormActionRequest: (config)->
-    # build config from action Form, main Panel and app defaults:
+    # build config from submitted form, current formAction und main request
     config = f.defaults {}, config, @formAction, @requestConfig.serialize()
-    # set headers
-    f.assign(config.headers, contentType: config.contentType)
-    config = f.omit(config, 'contentType')
-
     # clear the form and execute request
     @formAction = null
     @runRequest(config)
