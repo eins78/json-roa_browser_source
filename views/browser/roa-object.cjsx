@@ -49,7 +49,7 @@ RoaSelfRelation = React.createClass
 RoaCollection = React.createClass
   render: ()->
     collection = @props.collection
-    return null unless collection?.length > 1
+    return null unless collection?.relations.length > 1
 
     <ListGroupItem header='Collection'>
       [next link]
