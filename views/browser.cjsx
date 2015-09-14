@@ -32,8 +32,10 @@ module.exports = React.createClass
   render: ()->
     browser = @props.browser
 
+    {# Browser Tab#}
     <div className='modal-container'>
 
+      {# Per-Browser Modal for One-Time Forms#}
       {if f.presence(browser.formAction)?
         <ActionForm config={browser.formAction}
           onSubmit={@onFormActionSubmit}
@@ -42,15 +44,20 @@ module.exports = React.createClass
           container={this}/>
       }
 
+      {# Main Browser UI #}
       <div className='app--browser container-fluid row'>
 
+        {# Left Side #}
         <div className='col-sm-7'>
+
+          {# Request Cofig Panel #}
           <RequestConfig
             config={browser.requestConfig}
             onSubmit={@onRequestSubmit}
             onClear={@onClear}
             onConfigChange={@onRequestConfigChange}/>
 
+          {# ROA Result: Error or RoaObject #}
           {switch
             when (roaObject = browser.response?.roaObject)?
               <RoaObject roaObject={roaObject} onMethodSubmit={@onMethodSubmit}/>
@@ -60,15 +67,17 @@ module.exports = React.createClass
           }
         </div>
 
+        {# Right Side #}
         <div className='col-sm-5'>
+          {# Result: Running, Error or ResponseInfo #}
           {switch
+            when browser.currentRequest?
+              <RunningPanel request={browser.currentRequest}/>
             when browser.response?.error?
               <ErrorPanel title='Request Error!'
                 errorText={browser.response.error}/>
             when browser.response?
               <ResponseInfo response={browser.response}/>
-            when browser.currentRequest?
-              <RunningPanel request={browser.currentRequest}/>
           }
         </div>
 
