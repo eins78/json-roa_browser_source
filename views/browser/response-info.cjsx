@@ -31,7 +31,12 @@ module.exports = React.createClass
         </DataPanel>
         <DataPanel title='Headers'
             text={response.headersText} dataObj={response.headers}/>
-        <DataPanel title='JSON Data' dataObj={response.jsonRaw}/>
-        <DataPanel title='JSON-ROA Data' dataObj={response.jsonRoaRaw}/>
+
+        {if response.jsonRaw?
+          <DataPanel title='JSON Data' dataObj={response.jsonRaw}/>
+        }
+        {if response.jsonRoaRaw?
+          <DataPanel title='JSON-ROA Data' dataObj={response.jsonRoaRaw}/>
+        }
       </ul>
     </div>
