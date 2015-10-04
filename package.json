@@ -4,7 +4,8 @@
   "description": "JSON-ROA browser",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npm run model-tests",
+    "model-tests": "coffeetape spec/models/**.coffee",
     "dev": "webpack-dev-server",
     "watch": "webpack --progress --colors --watch",
     "prebuild": "rm -rf build && mkdir build",
@@ -43,11 +44,13 @@
     "coffee-jsx-loader": "^0.1.2",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.9.3",
+    "coffeetape": "1.0.1",
     "css-loader": "^0.15.6",
     "html-webpack-plugin": "^1.6.0",
     "html-webpack-template": "^2.4.0",
     "less": "^2.5.1",
     "less-loader": "^2.2.0",
+    "tape": "^4.2.1",
     "typopro-web": "^3.2.4",
     "webpack": "^1.10.5",
     "webpack-dev-server": "^1.10.1"

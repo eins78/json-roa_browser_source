@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "self-relation": {
+    "href": "/messages/",
+    "name": "Messages",
+    "relations": {
+      "root-doc": {
+        "name": "API-Doc",
+        "href": "/docs/index.html#messages"
+      }
+    }
+  },
+  "collection": {
+    "next": {
+      "href": "/messages/?page=1"
+    },
+    "relations": {
+      "1": {
+        "href": "/messages/{id}",
+        "relations": {
+          "doc": {
+            "name": "API-Doc",
+            "href": "/docs/index.html#message" } },
+        "methods": { "delete": {}, "get": {} }
+      },
+      "2": {
+        "href": "/messages/{id}",
+        "relations": {
+          "doc": {
+            "name": "API-Doc",
+            "href": "/docs/index.html#message"
+          }
+        },
+        "methods": { "delete": {}, "get": {} }
+      },
+      "3": {
+        "href": "/messages/{id}",
+        "relations": {
+          "doc": {
+            "name": "API-Doc",
+            "href": "/docs/index.html#message" }
+        },
+        "methods": { "delete": {}, "get": {} }
+      }
+    }
+  },
+  "relations": {
+    "messages": {
+      "href": "/messages/",
+      "name": "Messages",
+      "relations": {
+        "messages-doc": {
+          "name": "API-Doc",
+          "href": "/docs/index.html#messages" }
+      },
+      "methods": {"get": {}, "post": {} }
+    },
+    "message": {
+      "href": "/messages/{id}",
+      "relations": {
+        "doc": {
+          "name": "API-Doc",
+          "href": "/docs/index.html#message"
+        }
+      },
+      "methods": {"delete": {}, "get": {} }
+    },
+    "root": {
+      "name": "Root",
+      "href": "/",
+      "relations": {
+        "root-doc": {
+          "name": "API-Doc",
+          "href": "/docs/index.html#root"
+        }
+      }
+    }
+  }
+}
