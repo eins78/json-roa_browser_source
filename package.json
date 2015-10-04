@@ -1,6 +1,6 @@
 {
   "name": "json-roa-browser",
-  "version": "1.0.0",
+  "version": "0.0.5",
   "description": "JSON-ROA browser",
   "main": "app.js",
   "scripts": {
