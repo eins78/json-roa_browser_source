@@ -14,3 +14,13 @@ Good to know when reading the code:
 - `ampersand-react-mixin` [(docs)](https://github.com/ampersandjs/ampersand-react-mixin#ampersand-react-mixin)
   Wherever instances of Models are passed into React components, they
   will automatically listen on the changes of those instances.
+
+
+### TODO
+
+- rename `RoaObject.collection` to `RoaObject.roaCollection`
+  (https://github.com/AmpersandJS/ampersand-state/commit/ab899efec34c739cbaa393228003c1f0f515fd16)
+- RoaRelation methods:
+    - build dynamic form from needed data
+    - support templated urls
+- requestconfig: resolve against current host (dont expand `/` into full url)
