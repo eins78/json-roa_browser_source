@@ -14,6 +14,13 @@ jobs:
         scripts:
           'npm_install':
             body: 'npm install'
+        trial-attachments:
+          logs:
+            glob: spec/log*.txt
+            content-type: text/plain
+          logs_html:
+            glob: spec/log*.html
+            content-type: text/html
 
       tasks:
         unit:
@@ -21,6 +28,10 @@ jobs:
           scripts:
             'model_tests':
               name: 'Model Tests'
-              body: 'npm -s run model-tests'
+              body: 'npm -s run model-tests | tee spec/log.txt'
               start-when:
               - script: 'npm_install'
+            'format_tap':
+              body: 'cat spec/log.txt | npm run -s tap-spec -- --color | npm run -s coffee spec/_format-summary.coffee > spec/log.html'
+              start-when:
+              - script: 'model_tests'
