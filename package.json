@@ -22,7 +22,7 @@
     "ampersand-collection": "^1.4.5",
     "ampersand-model": "^5.0.3",
     "ampersand-react-mixin": "^0.1.4",
-    "ampersand-state": "^4.5.6",
+    "ampersand-state": "4.5.6",
     "bootstrap": "^3.3.5",
     "font-awesome": "^4.4.0",
     "hashchange": "^1.0.0",
