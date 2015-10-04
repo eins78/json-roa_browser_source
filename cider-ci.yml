@@ -1,0 +1,26 @@
+jobs:
+  'Tests':
+
+    run-on:
+    - type: branch
+      include-match: ^.*$
+
+    context:
+
+      task-defaults:
+        max-auto-trials: 1
+        traits:
+          nodejs: true
+        scripts:
+          'npm_install':
+            body: 'npm install'
+
+      tasks:
+        unit:
+          name: 'JS Tests'
+          scripts:
+            'model_tests':
+              name: 'Model Tests'
+              body: 'npm -s run model-tests'
+              start-when:
+              - script: 'npm_install'
